@@ -1,0 +1,67 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'cordic_pipelined' contains 4 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : design
+Design : cordic_pipelined
+Version: W-2024.09-SP2
+Date   : Thu Apr 30 16:37:01 2026
+****************************************
+
+Design allows ideal nets on clock nets.
+
+Library(s) Used:
+
+    gtech (File: /cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/gtech.db)
+
+Flip-Flop Types:
+
+    No flip-flop types specified.
+
+Latch Types:
+
+    No latch types specified.
+
+Operating Conditions:
+
+
+    Operating Condition Name : nom_pvt
+    Library : lsi_10k
+    Process :   1.00
+    Temperature :  25.00
+    Voltage :   5.00
+    Interconnect Model : balanced_tree
+
+Wire Loading Model:
+
+    No wire loading specified.
+
+
+Wire Loading Model Mode: top.
+
+Timing Ranges:
+
+    No timing ranges specified.
+
+Pin Input Delays:
+
+    None specified.
+
+Pin Output Delays:
+
+    None specified.
+
+Disabled Timing Arcs:
+
+    No arcs disabled.
+
+Required Licenses:
+
+    None Required
+
+Design Parameters:
+
+    None specified.
+
+Information: This design contains unmapped logic. (RPT-7)
+1

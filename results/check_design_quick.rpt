@@ -1,0 +1,46 @@
+ 
+****************************************
+check_design summary:
+Version:     W-2024.09-SP2
+Date:        Thu Apr 30 16:37:01 2026
+****************************************
+
+                   Name                                            Total
+--------------------------------------------------------------------------------
+Cells                                                              32
+    Cells do not drive (LINT-1)                                    32
+--------------------------------------------------------------------------------
+
+Warning: In design 'cordic_pipelined', cell 'C3236' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3237' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3240' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3241' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3244' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3245' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3248' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3249' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3252' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3253' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3256' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3257' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3260' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3261' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3264' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3265' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3268' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3269' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3272' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3273' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3276' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3277' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3280' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3281' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3284' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3285' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3288' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3289' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3292' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3293' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3296' does not drive any nets. (LINT-1)
+Warning: In design 'cordic_pipelined', cell 'C3297' does not drive any nets. (LINT-1)
+1

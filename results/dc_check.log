@@ -1,0 +1,100 @@
+Info: [VCS_SAVE_RESTORE_INFO] ASLR (Address Space Layout Randomization) is detected on the machine. To enable $save functionality, ASLR will be switched off and simv re-executed.
+Please use '-no_save' simv switch to avoid this.
+
+                            Design Compiler (R) NXT 
+
+               Version W-2024.09-SP2 for linux64 - Nov 28, 2024 
+
+                    Copyright (c) 1988 - 2024 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+Initializing...
+Current time:       Thu Apr 30 16:37:01 2026
+Hostname:           ts3.ecse.rpi.edu
+CPU Model:          Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz
+CPU Details:        Cores = 64 : Sockets = 2 : Cache Size = 22528 KB : Freq = 3.90 GHz
+OS:                 Linux 4.18.0-553.120.1.el8_10.x86_64
+RAM:                187 GB (Free 175 GB)
+Swap:                 7 GB (Free   7 GB)
+Work Filesystem:    /home/chome mounted to 192.168.40.100:/data/chome
+Tmp Filesystem:     / mounted to /dev/md127
+Work Disk:          300 GB (Free 270 GB)
+Tmp Disk:            78 GB (Free  64 GB)
+
+CPU Load: 3%, Ram Free: 175 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+# ============================================================
+# Quick Design Compiler syntax/elaboration check for CORDIC
+# ============================================================
+set TOP_MODULE cordic_pipelined
+cordic_pipelined
+remove_design -all
+1
+file mkdir results
+analyze -format sverilog {rtl/cordic_pipelined.sv}
+Running PRESTO HDLC
+Compiling source file ./rtl/cordic_pipelined.sv
+Presto compilation completed successfully.
+Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_10k.db'
+Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/dw_foundation.sldb'
+1
+elaborate $TOP_MODULE
+Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/gtech.db'
+Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/standard.sldb'
+  Loading link library 'lsi_10k'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Warning:  ./rtl/cordic_pipelined.sv:90: signed to unsigned part selection occurs. (VER-318)
+Warning:  ./rtl/cordic_pipelined.sv:54: signed to unsigned part selection occurs. (VER-318)
+
+Inferred memory devices in process in routine 'cordic_pipelined' in file
+	 ./rtl/cordic_pipelined.sv'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|     y_pipe_reg      | Flip-flop |  339  |  Y  | N  | None  | Async | N  | 101  |
+|     z_pipe_reg      | Flip-flop |  320  |  Y  | N  | None  | Async | N  | 101  |
+|   valid_pipe_reg    | Flip-flop |  17   |  Y  | N  | None  | Async | N  | 101  |
+|     x_pipe_reg      | Flip-flop |  339  |  Y  | N  | None  | Async | N  | 101  |
+==================================================================================
+Presto compilation completed successfully. (cordic_pipelined)
+Module: cordic_pipelined, Ports: 56, Input: 23, Output: 33, Inout: 0
+Module: cordic_pipelined, Registers: 1015, Async set/reset: 1015, Sync set/reset: 0
+Information: Module cordic_pipelined report end. (ELAB-965)
+Elaborated 1 design.
+Current design is now 'cordic_pipelined'.
+1
+current_design $TOP_MODULE
+Current design is 'cordic_pipelined'.
+{cordic_pipelined}
+link
+
+  Linking design 'cordic_pipelined'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  cordic_pipelined            /home/chome/chuani/cordic_vlsi_project/cordic_pipelined.db
+  lsi_10k (library)           /cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_10k.db
+  dw_foundation.sldb (library) /cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/dw_foundation.sldb
+
+1
+check_design > results/check_design_quick.rpt
+report_design > results/report_design_quick.rpt
+quit
+
+Memory usage for this session 142 Mbytes.
+Memory usage for this session including child processes 142 Mbytes.
+CPU usage for this session 4 seconds ( 0.00 hours ).
+Elapsed time for this session 5 seconds ( 0.00 hours ).
+
+Thank you...
