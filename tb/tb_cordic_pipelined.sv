@@ -1,0 +1,158 @@
+`timescale 1ns/1ps
+
+module tb_cordic_pipelined;
+
+    localparam integer IW = 20;
+    localparam integer OW = 16;
+    localparam integer ITERATIONS = 16;
+    localparam integer MAX_TESTS = 100;
+
+    logic clk;
+    logic rst_n;
+    logic valid_in;
+    logic signed [IW-1:0] angle_in;
+
+    logic valid_out;
+    logic signed [OW-1:0] cos_out;
+    logic signed [OW-1:0] sin_out;
+
+    logic signed [IW-1:0] angle_vec [0:MAX_TESTS-1];
+    logic signed [OW-1:0] cos_exp_vec [0:MAX_TESTS-1];
+    logic signed [OW-1:0] sin_exp_vec [0:MAX_TESTS-1];
+
+    integer num_tests;
+    integer file;
+    integer scan_status;
+    integer i;
+    integer check_idx;
+    integer error_count;
+
+    integer angle_tmp;
+    integer cos_tmp;
+    integer sin_tmp;
+
+    // ------------------------------------------------------------
+    // Device under test
+    // ------------------------------------------------------------
+    cordic_pipelined dut (
+        .clk(clk),
+        .rst_n(rst_n),
+        .valid_in(valid_in),
+        .angle_in(angle_in),
+        .valid_out(valid_out),
+        .cos_out(cos_out),
+        .sin_out(sin_out)
+    );
+
+    // ------------------------------------------------------------
+    // Clock generation
+    // 10 ns clock period = 100 MHz
+    // ------------------------------------------------------------
+    initial begin
+        clk = 1'b0;
+        forever #5 clk = ~clk;
+    end
+
+    // ------------------------------------------------------------
+    // Load test vectors from Python golden model
+    // ------------------------------------------------------------
+    initial begin
+        num_tests = 0;
+
+        file = $fopen("tb/test_vectors.txt", "r");
+
+        if (file == 0) begin
+            $display("ERROR: Could not open tb/test_vectors.txt");
+            $finish;
+        end
+
+        while (!$feof(file)) begin
+            scan_status = $fscanf(file, "%d %d %d\n", angle_tmp, cos_tmp, sin_tmp);
+
+            if (scan_status == 3) begin
+                angle_vec[num_tests] = angle_tmp[IW-1:0];
+                cos_exp_vec[num_tests] = cos_tmp[OW-1:0];
+                sin_exp_vec[num_tests] = sin_tmp[OW-1:0];
+                num_tests = num_tests + 1;
+            end
+        end
+
+        $fclose(file);
+
+        $display("Loaded %0d test vectors.", num_tests);
+    end
+
+    // ------------------------------------------------------------
+    // Main stimulus
+    // Drive input values on negative clock edges so they are stable
+    // before the positive clock edge samples them.
+    // ------------------------------------------------------------
+    initial begin
+        rst_n = 1'b0;
+        valid_in = 1'b0;
+        angle_in = '0;
+
+        repeat (5) @(negedge clk);
+        rst_n = 1'b1;
+
+        repeat (2) @(negedge clk);
+
+        // Send one new angle every clock cycle.
+        for (i = 0; i < num_tests; i = i + 1) begin
+            @(negedge clk);
+            valid_in = 1'b1;
+            angle_in = angle_vec[i];
+        end
+
+        @(negedge clk);
+        valid_in = 1'b0;
+        angle_in = '0;
+    end
+
+    // ------------------------------------------------------------
+    // Output checker
+    // Check outputs on negative clock edges so output values are
+    // stable after the DUT updates on the positive edge.
+    // ------------------------------------------------------------
+    initial begin
+        check_idx = 0;
+        error_count = 0;
+
+        wait(rst_n == 1'b1);
+
+        while (check_idx < num_tests) begin
+            @(negedge clk);
+
+            if (valid_out) begin
+                $display(
+                    "Test %0d: cos_out=%0d expected=%0d | sin_out=%0d expected=%0d",
+                    check_idx,
+                    cos_out,
+                    cos_exp_vec[check_idx],
+                    sin_out,
+                    sin_exp_vec[check_idx]
+                );
+
+                if ((cos_out !== cos_exp_vec[check_idx]) ||
+                    (sin_out !== sin_exp_vec[check_idx])) begin
+
+                    $display("MISMATCH at test %0d", check_idx);
+                    error_count = error_count + 1;
+                end
+
+                check_idx = check_idx + 1;
+            end
+        end
+
+        repeat (5) @(negedge clk);
+
+        if (error_count == 0) begin
+            $display("ALL TESTS PASSED.");
+        end else begin
+            $display("TESTS FAILED. error_count = %0d", error_count);
+        end
+
+        $finish;
+    end
+
+endmodule
