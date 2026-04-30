@@ -1,0 +1,9 @@
+# Synopsys Design Compiler setup file
+
+set_app_var target_library /cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_10k.db
+set_app_var synthetic_library /cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/dw_foundation.sldb
+set_app_var link_library "* $target_library $synthetic_library"
+
+set_app_var search_path [concat $search_path ./rtl ./scripts]
+
+set_app_var designer "Ian Chuang"
