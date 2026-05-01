@@ -25,8 +25,8 @@ check_design > results/check_design_before_compile.rpt
 # ------------------------------------------------------------
 # Timing constraints
 #
-# Start with 10 ns clock period.
-# 10 ns period = 100 MHz.
+# Clock period for this synthesis sweep point.
+# The exact period is set in the create_clock command below.
 # ------------------------------------------------------------
 create_clock -name clk -period 10.0 [get_ports clk]
 
