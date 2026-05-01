@@ -1,12 +1,14 @@
-# Synopsys Design Compiler binary database files
+# Synopsys generated/intermediate files
 *.ddc
-
-# Synopsys generated working directories/files
-alib-*
 *.svf
+*.mr
+*.pvl
+*.syn
+cksum_dir/
+alib-*/
 command.log
 default.svf
 
-# Temporary/editor files
+# Editor/temp files
 *~
 *.swp
