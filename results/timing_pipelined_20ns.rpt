@@ -1,0 +1,438 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 10
+Design : cordic_pipelined
+Version: W-2024.09-SP2
+Date   : Thu Apr 30 16:52:07 2026
+****************************************
+
+Operating Conditions: nom_pvt   Library: lsi_10k
+Wire Load Model Mode: top
+
+  Startpoint: z_pipe_reg[2][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[3][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[2][19]/CP (FD2)               0.00       0.30 r
+  z_pipe_reg[2][19]/QN (FD2)               2.38       2.68 r
+  U97/Z (IVDA)                             3.08       5.76 r
+  U2652/Z (EO)                             1.19       6.95 f
+  U2653/Z (NR2)                            1.46       8.41 r
+  U2661/Z (AO7)                            0.45       8.86 f
+  U2662/Z (AO6)                            1.47      10.33 r
+  U2681/Z (AO7)                            0.58      10.91 f
+  U2755/Z (AO6)                            1.21      12.12 r
+  U129/Z (IVA)                             0.37      12.49 f
+  U2762/CO (FA1A)                          1.17      13.66 f
+  U2761/CO (FA1A)                          1.17      14.84 f
+  U2760/CO (FA1A)                          1.17      16.01 f
+  U2759/CO (FA1A)                          1.17      17.18 f
+  U2758/CO (FA1A)                          1.11      18.29 f
+  U2757/Z (EO)                             1.13      19.42 f
+  x_pipe_reg[3][19]/D (FD2)                0.00      19.42 f
+  data arrival time                                  19.42
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  x_pipe_reg[3][19]/CP (FD2)               0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -19.42
+  -----------------------------------------------------------
+  slack (MET)                                         0.03
+
+
+  Startpoint: z_pipe_reg[5][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: y_pipe_reg[6][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[5][19]/CP (FD2)               0.00       0.30 r
+  z_pipe_reg[5][19]/Q (FD2)                4.11       4.41 r
+  U1239/Z2 (B2I)                           1.41       5.82 r
+  U1906/Z (EO)                             1.19       7.01 f
+  U1908/Z (ND2)                            0.84       7.86 r
+  U296/Z (IVA)                             0.31       8.16 f
+  U1946/Z (AO6)                            1.08       9.25 r
+  U1947/Z (AO7)                            0.45       9.70 f
+  U1948/Z (AO6)                            1.21      10.91 r
+  U122/Z (IVA)                             0.37      11.28 f
+  U1956/CO (FA1A)                          1.17      12.45 f
+  U1955/CO (FA1A)                          1.17      13.63 f
+  U1954/CO (FA1A)                          1.17      14.80 f
+  U1953/CO (FA1A)                          1.17      15.97 f
+  U1952/CO (FA1A)                          1.17      17.15 f
+  U1951/CO (FA1A)                          1.11      18.25 f
+  U1950/Z (EO)                             1.13      19.38 f
+  y_pipe_reg[6][19]/D (FD2)                0.00      19.38 f
+  data arrival time                                  19.38
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  y_pipe_reg[6][19]/CP (FD2)               0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -19.38
+  -----------------------------------------------------------
+  slack (MET)                                         0.07
+
+
+  Startpoint: z_pipe_reg[9][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[10][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[9][19]/CP (FD2)               0.00       0.30 r
+  z_pipe_reg[9][19]/QN (FD2)               5.28       5.58 r
+  U4326/Z (EOP)                            1.58       7.16 f
+  U4327/Z (NR2)                            1.46       8.62 r
+  U4331/Z (AO7)                            0.45       9.07 f
+  U4332/Z (AO6)                            1.34      10.41 r
+  U4553/Z (AO7)                            0.45      10.87 f
+  U4554/Z (AO6)                            1.21      12.08 r
+  U150/Z (IVA)                             0.37      12.44 f
+  U4560/CO (FA1A)                          1.17      13.62 f
+  U4559/CO (FA1A)                          1.17      14.79 f
+  U4558/CO (FA1A)                          1.17      15.97 f
+  U4557/CO (FA1A)                          1.17      17.14 f
+  U4556/CO (FA1A)                          1.11      18.25 f
+  U4555/Z (EO)                             1.13      19.37 f
+  x_pipe_reg[10][19]/D (FD2)               0.00      19.37 f
+  data arrival time                                  19.37
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  x_pipe_reg[10][19]/CP (FD2)              0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -19.37
+  -----------------------------------------------------------
+  slack (MET)                                         0.08
+
+
+  Startpoint: z_pipe_reg[6][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[7][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[6][19]/CP (FD2)               0.00       0.30 r
+  z_pipe_reg[6][19]/QN (FD2)               5.13       5.43 r
+  U3676/Z (EO)                             1.19       6.62 f
+  U3677/Z (NR2)                            1.59       8.20 r
+  U3916/Z (AO7)                            0.45       8.65 f
+  U3917/Z (AO6)                            1.60      10.26 r
+  U4046/Z (AO7)                            0.62      10.87 f
+  U4589/Z (AO6)                            1.34      12.22 r
+  U4590/Z (IVP)                            0.23      12.44 f
+  U4597/CO (FA1A)                          1.17      13.62 f
+  U4596/CO (FA1A)                          1.17      14.79 f
+  U4595/CO (FA1A)                          1.17      15.96 f
+  U4594/CO (FA1A)                          1.17      17.14 f
+  U4593/CO (FA1A)                          1.11      18.25 f
+  U4592/Z (EO)                             1.13      19.37 f
+  x_pipe_reg[7][19]/D (FD2)                0.00      19.37 f
+  data arrival time                                  19.37
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  x_pipe_reg[7][19]/CP (FD2)               0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -19.37
+  -----------------------------------------------------------
+  slack (MET)                                         0.08
+
+
+  Startpoint: z_pipe_reg[7][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[8][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[7][19]/CP (FD2)               0.00       0.30 r
+  z_pipe_reg[7][19]/QN (FD2)               5.13       5.43 r
+  U3698/Z (EO)                             1.19       6.62 f
+  U3699/Z (NR2)                            1.59       8.20 r
+  U3925/Z (AO7)                            0.45       8.65 f
+  U3926/Z (AO6)                            1.60      10.26 r
+  U4068/Z (AO7)                            0.62      10.87 f
+  U4577/Z (AO6)                            1.34      12.22 r
+  U4578/Z (IVP)                            0.23      12.44 f
+  U4584/CO (FA1A)                          1.17      13.62 f
+  U4583/CO (FA1A)                          1.17      14.79 f
+  U4582/CO (FA1A)                          1.17      15.96 f
+  U4581/CO (FA1A)                          1.17      17.14 f
+  U4580/CO (FA1A)                          1.11      18.25 f
+  U4579/Z (EO)                             1.13      19.37 f
+  x_pipe_reg[8][19]/D (FD2)                0.00      19.37 f
+  data arrival time                                  19.37
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  x_pipe_reg[8][19]/CP (FD2)               0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -19.37
+  -----------------------------------------------------------
+  slack (MET)                                         0.08
+
+
+  Startpoint: z_pipe_reg[8][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[9][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[8][19]/CP (FD2)               0.00       0.30 r
+  z_pipe_reg[8][19]/QN (FD2)               5.13       5.43 r
+  U3687/Z (EO)                             1.19       6.62 f
+  U3688/Z (NR2)                            1.59       8.20 r
+  U3934/Z (AO7)                            0.45       8.65 f
+  U3935/Z (AO6)                            1.60      10.26 r
+  U4090/Z (AO7)                            0.62      10.87 f
+  U4565/Z (AO6)                            1.34      12.22 r
+  U4566/Z (IVP)                            0.23      12.44 f
+  U4572/CO (FA1A)                          1.17      13.62 f
+  U4571/CO (FA1A)                          1.17      14.79 f
+  U4570/CO (FA1A)                          1.17      15.96 f
+  U4569/CO (FA1A)                          1.17      17.14 f
+  U4568/CO (FA1A)                          1.11      18.25 f
+  U4567/Z (EO)                             1.13      19.37 f
+  x_pipe_reg[9][19]/D (FD2)                0.00      19.37 f
+  data arrival time                                  19.37
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  x_pipe_reg[9][19]/CP (FD2)               0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -19.37
+  -----------------------------------------------------------
+  slack (MET)                                         0.08
+
+
+  Startpoint: z_pipe_reg[14][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[15][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[14][19]/CP (FD2)              0.00       0.30 r
+  z_pipe_reg[14][19]/Q (FD2)               1.89       2.19 f
+  U935/Z (IVP)                             2.58       4.77 r
+  U1509/Z (EO)                             2.56       7.34 f
+  U1528/Z (NR2)                            1.46       8.79 r
+  U1530/Z (NR2)                            0.37       9.16 f
+  U1538/Z (AO6)                            1.08      10.24 r
+  U1539/Z (AO7)                            0.58      10.82 f
+  U1566/Z (AO6)                            1.21      12.03 r
+  U128/Z (IVA)                             0.37      12.40 f
+  U1574/CO (FA1A)                          1.17      13.57 f
+  U1573/CO (FA1A)                          1.17      14.74 f
+  U1572/CO (FA1A)                          1.17      15.92 f
+  U1571/CO (FA1A)                          1.17      17.09 f
+  U1570/CO (FA1A)                          1.11      18.20 f
+  U1569/Z (EO)                             1.13      19.32 f
+  x_pipe_reg[15][19]/D (FD2)               0.00      19.32 f
+  data arrival time                                  19.32
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  x_pipe_reg[15][19]/CP (FD2)              0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -19.32
+  -----------------------------------------------------------
+  slack (MET)                                         0.13
+
+
+  Startpoint: z_pipe_reg[10][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[11][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[10][19]/CP (FD2)              0.00       0.30 r
+  z_pipe_reg[10][19]/QN (FD2)              5.28       5.58 r
+  U941/Z (EO)                              1.19       6.77 f
+  U3728/Z (NR2)                            1.46       8.22 r
+  U3967/Z (AO7)                            0.45       8.68 f
+  U3968/Z (AO6)                            1.47      10.15 r
+  U4112/Z (AO7)                            0.58      10.73 f
+  U4543/Z (AO6)                            1.21      11.94 r
+  U146/Z (IVA)                             0.37      12.31 f
+  U4549/CO (FA1A)                          1.17      13.48 f
+  U4548/CO (FA1A)                          1.17      14.65 f
+  U4547/CO (FA1A)                          1.17      15.83 f
+  U4546/CO (FA1A)                          1.17      17.00 f
+  U4545/CO (FA1A)                          1.11      18.11 f
+  U4544/Z (EO)                             1.13      19.23 f
+  x_pipe_reg[11][19]/D (FD2)               0.00      19.23 f
+  data arrival time                                  19.23
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  x_pipe_reg[11][19]/CP (FD2)              0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -19.23
+  -----------------------------------------------------------
+  slack (MET)                                         0.22
+
+
+  Startpoint: z_pipe_reg[12][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: z_pipe_reg[13][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[12][19]/CP (FD2)              0.00       0.30 r
+  z_pipe_reg[12][19]/Q (FD2)               1.47       1.77 f
+  U96/Z (IVP)                              1.93       3.70 r
+  U932/CO (FA1A)                           1.15       4.86 r
+  U835/Z (IVA)                             0.31       5.17 f
+  U944/Z (AO7)                             1.04       6.21 r
+  U986/CO (FA1A)                           1.08       7.29 r
+  U985/CO (FA1A)                           1.08       8.37 r
+  U984/CO (FA1A)                           1.08       9.45 r
+  U983/CO (FA1A)                           1.08      10.53 r
+  U982/CO (FA1A)                           1.08      11.62 r
+  U981/CO (FA1A)                           1.08      12.70 r
+  U946/Z (ND2)                             0.22      12.91 f
+  U948/Z (ND2)                             0.78      13.69 r
+  U980/CO (FA1A)                           1.08      14.77 r
+  U950/Z (ND2)                             0.22      14.99 f
+  U952/Z (ND2)                             0.78      15.76 r
+  U979/CO (FA1A)                           1.08      16.84 r
+  U975/Z (ND2)                             0.22      17.06 f
+  U977/Z (ND2)                             0.78      17.83 r
+  U978/CO (FA1A)                           1.01      18.84 r
+  U98/Z (IVA)                              0.31      19.15 f
+  z_pipe_reg[13][19]/D (FD2P)              0.00      19.15 f
+  data arrival time                                  19.15
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  z_pipe_reg[13][19]/CP (FD2P)             0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -19.15
+  -----------------------------------------------------------
+  slack (MET)                                         0.30
+
+
+  Startpoint: z_pipe_reg[4][19]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: y_pipe_reg[5][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  z_pipe_reg[4][19]/CP (FD2)               0.00       0.30 r
+  z_pipe_reg[4][19]/Q (FD2)                3.67       3.97 r
+  U1151/Z (IVDA)                           3.65       7.62 r
+  U2076/Z (ND2)                            0.30       7.92 f
+  U2077/Z (AO7)                            1.17       9.10 r
+  U2081/Z (AO6)                            0.48       9.57 f
+  U2100/Z (AO7)                            1.17      10.75 r
+  U2167/Z (AO6)                            0.39      11.14 f
+  U132/Z (IVA)                             0.38      11.52 r
+  U2175/CO (FA1A)                          1.08      12.60 r
+  U2174/CO (FA1A)                          1.08      13.69 r
+  U2173/CO (FA1A)                          1.08      14.77 r
+  U2172/CO (FA1A)                          1.08      15.85 r
+  U2171/CO (FA1A)                          1.08      16.93 r
+  U2170/CO (FA1A)                          0.94      17.87 r
+  U2169/Z (EO)                             1.13      18.99 f
+  y_pipe_reg[5][19]/D (FD2)                0.00      18.99 f
+  data arrival time                                  18.99
+
+  clock clk (rise edge)                   20.00      20.00
+  clock network delay (ideal)              0.30      20.30
+  y_pipe_reg[5][19]/CP (FD2)               0.00      20.30 r
+  library setup time                      -0.85      19.45
+  data required time                                 19.45
+  -----------------------------------------------------------
+  data required time                                 19.45
+  data arrival time                                 -18.99
+  -----------------------------------------------------------
+  slack (MET)                                         0.46
+
+
+1

@@ -1,0 +1,474 @@
+Info: [VCS_SAVE_RESTORE_INFO] ASLR (Address Space Layout Randomization) is detected on the machine. To enable $save functionality, ASLR will be switched off and simv re-executed.
+Please use '-no_save' simv switch to avoid this.
+
+                            Design Compiler (R) NXT 
+
+               Version W-2024.09-SP2 for linux64 - Nov 28, 2024 
+
+                    Copyright (c) 1988 - 2024 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+Initializing...
+Current time:       Thu Apr 30 16:51:41 2026
+Hostname:           ts3.ecse.rpi.edu
+CPU Model:          Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz
+CPU Details:        Cores = 64 : Sockets = 2 : Cache Size = 22528 KB : Freq = 3.90 GHz
+OS:                 Linux 4.18.0-553.120.1.el8_10.x86_64
+RAM:                187 GB (Free 174 GB)
+Swap:                 7 GB (Free   7 GB)
+Work Filesystem:    /home/chome mounted to 192.168.40.100:/data/chome
+Tmp Filesystem:     / mounted to /dev/md127
+Work Disk:          300 GB (Free 270 GB)
+Tmp Disk:            78 GB (Free  64 GB)
+
+CPU Load: 1%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+# ============================================================
+# Synopsys Design Compiler synthesis script
+# Fully Pipelined Fixed-Point CORDIC Accelerator
+# ============================================================
+set TOP_MODULE cordic_pipelined
+cordic_pipelined
+remove_design -all
+1
+file mkdir results
+# ------------------------------------------------------------
+# Read and elaborate RTL
+# ------------------------------------------------------------
+analyze -format sverilog {rtl/cordic_pipelined.sv}
+Running PRESTO HDLC
+Compiling source file ./rtl/cordic_pipelined.sv
+Presto compilation completed successfully.
+Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_10k.db'
+Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/dw_foundation.sldb'
+1
+elaborate $TOP_MODULE
+Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/gtech.db'
+Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/standard.sldb'
+  Loading link library 'lsi_10k'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Warning:  ./rtl/cordic_pipelined.sv:90: signed to unsigned part selection occurs. (VER-318)
+Warning:  ./rtl/cordic_pipelined.sv:54: signed to unsigned part selection occurs. (VER-318)
+
+Inferred memory devices in process in routine 'cordic_pipelined' in file
+	 ./rtl/cordic_pipelined.sv'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|     y_pipe_reg      | Flip-flop |  339  |  Y  | N  | None  | Async | N  | 101  |
+|     z_pipe_reg      | Flip-flop |  320  |  Y  | N  | None  | Async | N  | 101  |
+|   valid_pipe_reg    | Flip-flop |  17   |  Y  | N  | None  | Async | N  | 101  |
+|     x_pipe_reg      | Flip-flop |  339  |  Y  | N  | None  | Async | N  | 101  |
+==================================================================================
+Presto compilation completed successfully. (cordic_pipelined)
+Module: cordic_pipelined, Ports: 56, Input: 23, Output: 33, Inout: 0
+Module: cordic_pipelined, Registers: 1015, Async set/reset: 1015, Sync set/reset: 0
+Information: Module cordic_pipelined report end. (ELAB-965)
+Elaborated 1 design.
+Current design is now 'cordic_pipelined'.
+1
+current_design $TOP_MODULE
+Current design is 'cordic_pipelined'.
+{cordic_pipelined}
+link
+
+  Linking design 'cordic_pipelined'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  cordic_pipelined            /home/chome/chuani/cordic_vlsi_project/cordic_pipelined.db
+  lsi_10k (library)           /cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_10k.db
+  dw_foundation.sldb (library) /cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/dw_foundation.sldb
+
+1
+check_design > results/check_design_before_compile.rpt
+# ------------------------------------------------------------
+# Timing constraints
+#
+# Start with 10 ns clock period.
+# 10 ns period = 100 MHz.
+# ------------------------------------------------------------
+create_clock -name clk -period 20.0 [get_ports clk]
+1
+set_clock_latency 0.3 [get_clocks clk]
+1
+# Apply input delay to all inputs except clock and reset.
+set input_ports_no_clk_rst [remove_from_collection [all_inputs] [get_ports {clk rst_n}]]
+{valid_in angle_in[19] angle_in[18] angle_in[17] angle_in[16] angle_in[15] angle_in[14] angle_in[13] angle_in[12] angle_in[11] angle_in[10] angle_in[9] angle_in[8] angle_in[7] angle_in[6] angle_in[5] angle_in[4] angle_in[3] angle_in[2] angle_in[1] angle_in[0]}
+set_input_delay 1.0 -clock clk $input_ports_no_clk_rst
+1
+set_output_delay 1.0 -clock clk [all_outputs]
+1
+# Basic load/fanout assumptions
+set_load 0.1 [all_outputs]
+1
+set_max_fanout 8 [all_inputs]
+1
+# ------------------------------------------------------------
+# Compile
+# ------------------------------------------------------------
+compile_ultra
+Information: Performing leakage power optimization. (PWR-850)
+CPU Load: 1%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+Alib files are up-to-date.
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | W-2024.09-DWBB_202409.2 |     *     |
+| Licensed DW Building Blocks        | W-2024.09-DWBB_202409.2 |     *     |
+============================================================================
+
+====================================================================================================
+| Flow Information                                                                                 |
+----------------------------------------------------------------------------------------------------
+| Flow         | Design Compiler NXT WLM                                                           |
+| Command Line | compile_ultra                                                                     |
+====================================================================================================
+| Design Information                                      | Value                                  |
+====================================================================================================
+| Number of Scenarios                                     | 0                                      |
+| Leaf Cell Count                                         | 1254                                   |
+| Number of User Hierarchies                              | 0                                      |
+| Sequential Cell Count                                   | 1015                                   |
+| Macro Count                                             | 0                                      |
+| Number of Power Domains                                 | 0                                      |
+| Number of Path Groups                                   | 2                                      |
+| Number of VT Class                                      | 0                                      |
+| Number of Clocks                                        | 1                                      |
+| Number of Dont Touch Cells                              | 75                                     |
+| Number of Dont Touch Nets                               | 0                                      |
+| Number of Size Only Cells                               | 0                                      |
+| Design with UPF Data                                    | false                                  |
+====================================================================================================
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 32 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+  Simplifying Design 'cordic_pipelined'
+
+Loaded alib file './alib-52/lsi_10k.db.alib'
+Module: DW01_NAND2, Ports: 3, Input: 2, Output: 1, Inout: 0
+Module: DW01_NAND2, Registers: 0, Async set/reset: 0, Sync set/reset: 0
+  Building model 'DW01_NAND2'
+Information: Ungrouping 0 of 1 hierarchies before Pass 1 (OPT-775)
+CPU Load: 1%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'cordic_pipelined'
+Information: The register 'x_pipe_reg[0][1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[0][3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[0][7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[0][10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[0][13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[0][14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[0][16]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[0][17]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[0][18]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[0][19]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][16]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][17]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][18]' is a constant and will be removed. (OPT-1206)
+Information: The register 'y_pipe_reg[0][19]' is a constant and will be removed. (OPT-1206)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[0][2]' is removed because it is merged to 'x_pipe_reg[0][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[0][4]' is removed because it is merged to 'x_pipe_reg[0][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[0][5]' is removed because it is merged to 'x_pipe_reg[0][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[0][6]' is removed because it is merged to 'x_pipe_reg[0][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[0][8]' is removed because it is merged to 'x_pipe_reg[0][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[0][9]' is removed because it is merged to 'x_pipe_reg[0][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[0][11]' is removed because it is merged to 'x_pipe_reg[0][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[0][12]' is removed because it is merged to 'x_pipe_reg[0][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[0][15]' is removed because it is merged to 'x_pipe_reg[0][0]'. (OPT-1215)
+ Implement Synthetic for 'cordic_pipelined'.
+Information: The register 'x_pipe_reg[1][19]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[1][18]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[1][17]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[1][16]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[1][14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[1][13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[1][10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[1][7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[1][3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'x_pipe_reg[1][1]' is a constant and will be removed. (OPT-1206)
+Information: Added key list 'DesignWare' to design 'cordic_pipelined'. (DDB-72)
+CPU Load: 1%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Warning: Main library 'lsi_10k' does not specify the following unit required for power: 'Leakage Power'. (PWR-424)
+Warning: Target library(s) are not characterized for internal power.  Compile with power constraints is NOT recommended. (PWR-13)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[1][2]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[1][4]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[1][5]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[1][6]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[1][8]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[1][9]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[1][11]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[1][12]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[1][15]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][0]' is removed because it is merged to 'x_pipe_reg[1][0]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][1]' is removed because it is merged to 'y_pipe_reg[1][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][3]' is removed because it is merged to 'y_pipe_reg[1][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][7]' is removed because it is merged to 'y_pipe_reg[1][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][13]' is removed because it is merged to 'y_pipe_reg[1][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][14]' is removed because it is merged to 'y_pipe_reg[1][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][16]' is removed because it is merged to 'y_pipe_reg[1][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][17]' is removed because it is merged to 'y_pipe_reg[1][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][18]' is removed because it is merged to 'y_pipe_reg[1][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][19]' is removed because it is merged to 'y_pipe_reg[1][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][2]' is removed because it is merged to 'y_pipe_reg[1][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][4]' is removed because it is merged to 'y_pipe_reg[1][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][5]' is removed because it is merged to 'y_pipe_reg[1][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][6]' is removed because it is merged to 'y_pipe_reg[1][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][8]' is removed because it is merged to 'y_pipe_reg[1][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][9]' is removed because it is merged to 'y_pipe_reg[1][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][12]' is removed because it is merged to 'y_pipe_reg[1][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][15]' is removed because it is merged to 'y_pipe_reg[1][11]'. (OPT-1215)
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][18]' is removed because it is merged to 'y_pipe_reg[2][17]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][19]' is removed because it is merged to 'y_pipe_reg[2][17]'. (OPT-1215)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:21   21949.0      0.47       0.5       0.0                              0.0000
+    0:00:21   21830.0      0.03       0.0       0.0                              0.0000
+
+  Beginning Constant Register Removal
+  -----------------------------------
+    0:00:21   21842.0      0.03       0.0       0.0                              0.0000
+    0:00:21   21803.0      0.03       0.0       0.0                              0.0000
+
+  Beginning Global Optimizations
+  ------------------------------
+No buffer cells compatible for Numerical Synthesis
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+  Mapping 'cordic_pipelined_DP_OP_157_294_6676_2'
+Information: The register 'z_pipe_reg[12][0]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[12][1]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[11][0]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[10][0]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[9][0]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[8][0]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[7][0]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[6][0]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[11][1]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[10][1]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[9][1]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[8][1]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[7][1]' will be removed. (OPT-1207)
+Information: The register 'z_pipe_reg[6][1]' will be removed. (OPT-1207)
+
+  Beginning Isolate Ports
+  -----------------------
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:22   17419.0      0.03       0.0       0.0                              0.0000
+    0:00:22   17452.0      0.00       0.0       0.0                              0.0000
+    0:00:22   17452.0      0.00       0.0       0.0                              0.0000
+    0:00:22   17452.0      0.00       0.0       0.0                              0.0000
+Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_10k.db'
+    0:00:23   17325.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17310.0      0.00       0.0       0.0                              0.0000
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[2][7]' is removed because it is merged to 'x_pipe_reg[2][10]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[2][9]' is removed because it is merged to 'x_pipe_reg[2][12]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[2][6]' is removed because it is merged to 'x_pipe_reg[2][12]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[2][8]' is removed because it is merged to 'x_pipe_reg[2][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'x_pipe_reg[2][5]' is removed because it is merged to 'x_pipe_reg[2][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][5]' is removed because it is merged to 'y_pipe_reg[2][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][8]' is removed because it is merged to 'y_pipe_reg[2][11]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][6]' is removed because it is merged to 'y_pipe_reg[2][12]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][9]' is removed because it is merged to 'y_pipe_reg[2][12]'. (OPT-1215)
+Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][7]' is removed because it is merged to 'y_pipe_reg[2][10]'. (OPT-1215)
+    0:00:23   17220.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17220.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17220.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17220.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17220.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:23   17086.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:24   17083.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17073.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17073.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17073.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17067.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17031.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17031.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17031.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17031.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17031.0      0.00       0.0       0.0                              0.0000
+    0:00:24   17031.0      0.00       0.0       0.0                              0.0000
+CPU Load: 1%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Warning: Main library 'lsi_10k' does not specify the following unit required for power: 'Leakage Power'. (PWR-424)
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+CPU Load: 1%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+Information: Total number of MV cells in the design.
+----------------------------------------------------------------------------------------------------
+ MV Cells                                           Total Number                                   
+----------------------------------------------------------------------------------------------------
+ Level Shifter:                                     0                                             
+ Enable Level Shifter:                              0                                             
+ Isolation Cell:                                    0                                             
+ Retention Cell:                                    0                                             
+ Retention Clamp Cell:                              0                                             
+ Switch Cell:                                       0                                             
+ Always-On Cell:                                    0                                             
+ Repeater Cell:                                     0                                             
+
+----------------------------------------------------------------------------------------------------
+Unmapped MV Cells 
+----------------------------------------------------------------------------------------------------
+0 Isolation Cells are unmapped 
+0 Retention Clamp Cells are unmapped 
+----------------------------------------------------------------------------------------------------
+1
+check_design > results/check_design_after_compile.rpt
+# ------------------------------------------------------------
+# Reports
+# ------------------------------------------------------------
+report_timing -max_paths 10 > results/timing_pipelined_20ns.rpt
+report_area -hierarchy > results/area_pipelined_20ns.rpt
+report_power -hierarchy > results/power_pipelined_20ns.rpt
+report_constraint -all_violators > results/constraints_pipelined_20ns.rpt
+report_qor > results/qor_pipelined_20ns.rpt
+report_resources > results/resources_pipelined_20ns.rpt
+# ------------------------------------------------------------
+# Save outputs
+# ------------------------------------------------------------
+write -format verilog -hierarchy -output results/cordic_pipelined_netlist_20ns.v
+Writing verilog file '/home/chome/chuani/cordic_vlsi_project/results/cordic_pipelined_netlist_20ns.v'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+1
+write -format ddc -hierarchy -output results/cordic_pipelined_20ns.ddc
+Writing ddc file 'results/cordic_pipelined_20ns.ddc'.
+1
+quit
+
+Memory usage for this session 300 Mbytes.
+Memory usage for this session including child processes 300 Mbytes.
+CPU usage for this session 18 seconds ( 0.01 hours ).
+Elapsed time for this session 31 seconds ( 0.01 hours ).
+
+Thank you...

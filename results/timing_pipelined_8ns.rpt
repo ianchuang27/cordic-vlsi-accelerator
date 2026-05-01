@@ -1,0 +1,382 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 10
+Design : cordic_pipelined
+Version: W-2024.09-SP2
+Date   : Thu Apr 30 18:30:35 2026
+****************************************
+
+Operating Conditions: nom_pvt   Library: lsi_10k
+Wire Load Model Mode: top
+
+  Startpoint: x_pipe_reg[11][11]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: y_pipe_reg[12][15]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  x_pipe_reg[11][11]/CP (FD2P)             0.00       0.30 r
+  x_pipe_reg[11][11]/QN (FD2P)             2.02       2.32 f
+  U4142/Z (OR2P)                           1.04       3.36 f
+  U1991/Z (MUX21L)                         0.96       4.32 r
+  U1627/Z (MUX21LP)                        1.03       5.34 r
+  U1392/Z (MUX21LP)                        0.99       6.33 r
+  U1953/Z (MUX21L)                         0.96       7.29 r
+  U2256/Z (EOP)                            1.13       8.42 f
+  U2255/Z (AO7P)                           0.63       9.05 r
+  y_pipe_reg[12][15]/D (FD2P)              0.00       9.05 r
+  data arrival time                                   9.05
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  y_pipe_reg[12][15]/CP (FD2P)             0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.05
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.60
+
+
+  Startpoint: y_pipe_reg[8][10]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[9][16]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  y_pipe_reg[8][10]/CP (FD2P)              0.00       0.30 r
+  y_pipe_reg[8][10]/QN (FD2P)              2.02       2.32 f
+  U1417/Z (NR2P)                           0.94       3.26 r
+  U1281/Z (MUX21L)                         0.96       4.22 r
+  U2213/Z (IVAP)                           0.21       4.43 f
+  U1302/Z (MUX21L)                         0.56       4.98 r
+  U2212/Z (MUX21LP)                        1.06       6.04 r
+  U9261/Z (MUX21LP)                        1.09       7.13 r
+  U9332/Z (EOP)                            1.13       8.26 f
+  U9333/Z (ND2P)                           0.56       8.83 r
+  U2415/Z (ND2)                            0.22       9.04 f
+  x_pipe_reg[9][16]/D (FD2)                0.00       9.04 f
+  data arrival time                                   9.04
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  x_pipe_reg[9][16]/CP (FD2)               0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.04
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.59
+
+
+  Startpoint: x_pipe_reg[7][7]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: y_pipe_reg[8][16]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  x_pipe_reg[7][7]/CP (FD2P)               0.00       0.30 r
+  x_pipe_reg[7][7]/Q (FD2P)                1.63       1.93 r
+  U2454/Y (IVDAP)                          0.26       2.18 f
+  U3297/Z (NR2P)                           0.94       3.13 r
+  U1718/Z (MUX21L)                         0.96       4.09 r
+  U1717/Z (MUX21L)                         0.96       5.04 r
+  U2227/Z (MUX21LP)                        0.99       6.03 r
+  U1455/Z (MUX21LP)                        1.09       7.13 r
+  U9059/Z (EOP)                            1.13       8.26 f
+  U9060/Z (ND2P)                           0.56       8.82 r
+  U2419/Z (ND2)                            0.22       9.04 f
+  y_pipe_reg[8][16]/D (FD2)                0.00       9.04 f
+  data arrival time                                   9.04
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  y_pipe_reg[8][16]/CP (FD2)               0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.04
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.59
+
+
+  Startpoint: x_pipe_reg[5][5]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: y_pipe_reg[6][16]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  x_pipe_reg[5][5]/CP (FD2P)               0.00       0.30 r
+  x_pipe_reg[5][5]/QN (FD2P)               2.04       2.34 f
+  U3883/Z (NR2P)                           0.82       3.16 r
+  U1631/Z (MUX21L)                         0.96       4.12 r
+  U1624/Z (MUX21LP)                        1.03       5.14 r
+  U1623/Z (MUX21L)                         0.89       6.03 r
+  U1752/Z (MUX21LP)                        1.09       7.12 r
+  U1751/Z (EOP)                            1.13       8.26 f
+  U7701/Z (ND2P)                           0.56       8.82 r
+  U2424/Z (ND2)                            0.22       9.03 f
+  y_pipe_reg[6][16]/D (FD2)                0.00       9.03 f
+  data arrival time                                   9.03
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  y_pipe_reg[6][16]/CP (FD2)               0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.03
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.58
+
+
+  Startpoint: y_pipe_reg[7][11]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[8][16]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  y_pipe_reg[7][11]/CP (FD2P)              0.00       0.30 r
+  y_pipe_reg[7][11]/QN (FD2P)              2.02       2.32 f
+  U2087/Z (NR2P)                           0.94       3.26 r
+  U8688/Z (MUX21LP)                        1.06       4.32 r
+  U2091/Z (MUX21L)                         0.89       5.21 r
+  U1445/Z (IVP)                            0.23       5.44 f
+  U1443/Z (MUX21LP)                        0.59       6.03 r
+  U1442/Z (MUX21LP)                        1.09       7.12 r
+  U1441/Z (EOP)                            1.13       8.25 f
+  U8755/Z (ND2P)                           0.56       8.82 r
+  U2420/Z (ND2)                            0.22       9.03 f
+  x_pipe_reg[8][16]/D (FD2)                0.00       9.03 f
+  data arrival time                                   9.03
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  x_pipe_reg[8][16]/CP (FD2)               0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.03
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.58
+
+
+  Startpoint: x_pipe_reg[13][13]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: y_pipe_reg[14][15]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  x_pipe_reg[13][13]/CP (FD2)              0.00       0.30 r
+  x_pipe_reg[13][13]/QN (FD2)              1.77       2.07 f
+  U1280/Z (OR2P)                           1.04       3.12 f
+  U1525/Z (MUX21L)                         0.96       4.07 r
+  U1524/Z (MUX21L)                         0.96       5.03 r
+  U2181/Z (MUX21LP)                        1.06       6.09 r
+  U2180/Z (MUX21LP)                        1.03       7.11 r
+  U12131/Z (ENP)                           1.13       8.25 f
+  U12132/Z (ND2P)                          0.56       8.81 r
+  U2475/Z (ND2)                            0.22       9.02 f
+  y_pipe_reg[14][15]/D (FD2)               0.00       9.02 f
+  data arrival time                                   9.02
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  y_pipe_reg[14][15]/CP (FD2)              0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.02
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.57
+
+
+  Startpoint: y_pipe_reg[14][14]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: x_pipe_reg[15][14]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  y_pipe_reg[14][14]/CP (FD2P)             0.00       0.30 r
+  y_pipe_reg[14][14]/Q (FD2P)              1.56       1.86 r
+  U1970/Y (IVDAP)                          0.22       2.07 f
+  U2890/Z (OR2P)                           1.04       3.12 f
+  U1974/Z (MUX21L)                         0.96       4.07 r
+  U1340/Z (MUX21L)                         0.96       5.03 r
+  U2177/Z (MUX21LP)                        1.06       6.09 r
+  U2176/Z (MUX21LP)                        1.03       7.11 r
+  U12271/Z (ENP)                           1.13       8.25 f
+  U12272/Z (ND2P)                          0.56       8.81 r
+  U2407/Z (ND2)                            0.22       9.02 f
+  x_pipe_reg[15][14]/D (FD2P)              0.00       9.02 f
+  data arrival time                                   9.02
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  x_pipe_reg[15][14]/CP (FD2P)             0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.02
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.57
+
+
+  Startpoint: x_pipe_reg[7][7]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: y_pipe_reg[8][17]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  x_pipe_reg[7][7]/CP (FD2P)               0.00       0.30 r
+  x_pipe_reg[7][7]/Q (FD2P)                1.48       1.78 f
+  U2454/Z (IVDAP)                          0.65       2.43 f
+  U1513/Z (ND2P)                           0.69       3.11 r
+  U1512/Z (MUX21L)                         0.96       4.07 r
+  U9006/Z (MUX21LP)                        1.06       5.13 r
+  U9007/Z (MUX21LP)                        1.16       6.28 r
+  U1454/Z (MUX21LP)                        1.06       7.34 r
+  U1481/Z (MUX21L)                         0.83       8.17 r
+  U1480/Z (ND2)                            0.22       8.38 f
+  U1479/Z (ND2)                            0.64       9.02 r
+  y_pipe_reg[8][17]/D (FD2)                0.00       9.02 r
+  data arrival time                                   9.02
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  y_pipe_reg[8][17]/CP (FD2)               0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.02
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.57
+
+
+  Startpoint: x_pipe_reg[7][7]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: y_pipe_reg[8][18]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  x_pipe_reg[7][7]/CP (FD2P)               0.00       0.30 r
+  x_pipe_reg[7][7]/Q (FD2P)                1.48       1.78 f
+  U2454/Z (IVDAP)                          0.65       2.43 f
+  U1513/Z (ND2P)                           0.69       3.11 r
+  U1512/Z (MUX21L)                         0.96       4.07 r
+  U9006/Z (MUX21LP)                        1.06       5.13 r
+  U9007/Z (MUX21LP)                        1.16       6.28 r
+  U1454/Z (MUX21LP)                        1.06       7.34 r
+  U1453/Z (MUX21L)                         0.83       8.17 r
+  U1452/Z (ND2)                            0.22       8.38 f
+  U1451/Z (ND2)                            0.64       9.02 r
+  y_pipe_reg[8][18]/D (FD2)                0.00       9.02 r
+  data arrival time                                   9.02
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  y_pipe_reg[8][18]/CP (FD2)               0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.02
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.57
+
+
+  Startpoint: x_pipe_reg[7][7]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: y_pipe_reg[8][19]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.30       0.30
+  x_pipe_reg[7][7]/CP (FD2P)               0.00       0.30 r
+  x_pipe_reg[7][7]/Q (FD2P)                1.48       1.78 f
+  U2454/Z (IVDAP)                          0.65       2.43 f
+  U1513/Z (ND2P)                           0.69       3.11 r
+  U1512/Z (MUX21L)                         0.96       4.07 r
+  U9006/Z (MUX21LP)                        1.06       5.13 r
+  U9007/Z (MUX21LP)                        1.16       6.28 r
+  U1454/Z (MUX21LP)                        1.06       7.34 r
+  U1523/Z (MUX21L)                         0.83       8.17 r
+  U1522/Z (ND2)                            0.22       8.38 f
+  U1521/Z (ND2)                            0.64       9.02 r
+  y_pipe_reg[8][19]/D (FD2)                0.00       9.02 r
+  data arrival time                                   9.02
+
+  clock clk (rise edge)                    8.00       8.00
+  clock network delay (ideal)              0.30       8.30
+  y_pipe_reg[8][19]/CP (FD2)               0.00       8.30 r
+  library setup time                      -0.85       7.45
+  data required time                                  7.45
+  -----------------------------------------------------------
+  data required time                                  7.45
+  data arrival time                                  -9.02
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.57
+
+
+1

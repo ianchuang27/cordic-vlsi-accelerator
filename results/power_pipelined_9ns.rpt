@@ -1,0 +1,36 @@
+ 
+****************************************
+Report : power
+        -hier
+        -analysis_effort low
+Design : cordic_pipelined
+Version: W-2024.09-SP2
+Date   : Thu Apr 30 18:28:53 2026
+****************************************
+
+
+Library(s) Used:
+
+    lsi_10k (File: /cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_10k.db)
+
+Information: The cells in your design are not characterized for internal power. (PWR-229)
+
+Operating Conditions: nom_pvt   Library: lsi_10k
+Wire Load Model Mode: top
+
+
+Global Operating Voltage = 5    
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 0.100000ff
+    Time Units = 1ns
+    Dynamic Power Units = 100nW    (derived from V,C,T units)
+    Leakage Power Units = Unitless
+
+
+--------------------------------------------------------------------------------
+                                       Switch   Int      Leak     Total
+Hierarchy                              Power    Power    Power    Power    %
+--------------------------------------------------------------------------------
+cordic_pipelined                       3.86e+03    0.000    0.000 3.86e+03 100.0
+1

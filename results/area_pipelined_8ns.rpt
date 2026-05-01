@@ -1,0 +1,43 @@
+ 
+****************************************
+Report : area
+Design : cordic_pipelined
+Version: W-2024.09-SP2
+Date   : Thu Apr 30 18:30:35 2026
+****************************************
+
+Library(s) Used:
+
+    lsi_10k (File: /cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_10k.db)
+
+Number of ports:                           56
+Number of nets:                         14833
+Number of cells:                        14023
+Number of combinational cells:          13124
+Number of sequential cells:               898
+Number of macros/black boxes:               0
+Number of buf/inv:                       1238
+Number of references:                      36
+
+Combinational area:              27943.000000
+Buf/Inv area:                     1605.000000
+Noncombinational area:            8374.000000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                 36317.000000
+Total area:                 undefined
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area            Local cell area
+                                  -------------------  ----------------------------- 
+Hierarchical cell                 Absolute    Percent  Combi-      Noncombi-  Black-
+                                  Total       Total    national    national   boxes   Design
+--------------------------------  ----------  -------  ----------  ---------  ------  ---------
+cordic_pipelined                  36317.0000    100.0  27943.0000  8374.0000  0.0000  cordic_pipelined
+--------------------------------  ----------  -------  ----------  ---------  ------  ---------
+Total                                                  27943.0000  8374.0000  0.0000
+
+1
