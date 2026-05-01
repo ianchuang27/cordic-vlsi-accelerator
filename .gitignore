@@ -1,0 +1,12 @@
+# Synopsys Design Compiler binary database files
+*.ddc
+
+# Synopsys generated working directories/files
+alib-*
+*.svf
+command.log
+default.svf
+
+# Temporary/editor files
+*~
+*.swp
