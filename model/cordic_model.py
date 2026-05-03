@@ -2,11 +2,10 @@ import math
 import os
 
 
-# Fixed-Point CORDIC Golden Model
-# Rotation mode: computes cos(theta) and sin(theta)
+# Fixed-point CORDIC model used to generate RTL reference vectors.
 
 
-# Fixed-point design choices
+# Fixed-point settings
 
 
 INTERNAL_WIDTH = 20
@@ -18,13 +17,7 @@ ITERATIONS = 16
 SCALE = 1 << FRAC_BITS
 OUTPUT_SCALE = 1 << OUTPUT_FRAC_BITS
 
-# CORDIC gain correction
-#
-# CORDIC rotations increase the vector magnitude by:
-# product(sqrt(1 + 2^(-2i)))
-#
-# To compensate, initialize x0 = K where:
-# K = product(1 / sqrt(1 + 2^(-2i)))
+# Gain compensation constant for the CORDIC rotations.
 
 K_FLOAT = 1.0
 for i in range(ITERATIONS):
@@ -37,27 +30,27 @@ ATAN_TABLE = [round(math.atan(2 ** -i) * SCALE) for i in range(ITERATIONS)]
 
 
 def float_to_fixed(value, frac_bits=FRAC_BITS):
-    
-    # Converting floating-point value to signed fixed-point integer.
- 
+
+    # Scale a real value into fixed-point integer form.
+
     return int(round(value * (1 << frac_bits)))
 
 
 def fixed_to_float(value, frac_bits=FRAC_BITS):
-  
-    # Converting signed fixed-point integer back to floating-point.
-   
+
+    # Convert fixed-point integer back to a real value.
+
     return value / float(1 << frac_bits)
 
 
 def saturate_signed(value, width):
-    
-    # Saturating integer to signed range for a given bit width.
+
+    # Clamp to the signed range for the selected width.
 
     # For 16-bit signed:
     # min = -2^15 = -32768
     # max =  2^15 - 1 = 32767
-    
+
     min_val = -(1 << (width - 1))
     max_val = (1 << (width - 1)) - 1
 
@@ -70,7 +63,7 @@ def saturate_signed(value, width):
 
 
 def cordic_rotation(theta_rad):
-  # Running 16-iteration fixed-point CORDIC rotation mode.
+  # Reference CORDIC rotation-mode calculation.
 
   #  Input:
   #      theta_rad: input angle in radians
@@ -80,7 +73,7 @@ def cordic_rotation(theta_rad):
   #      sin_q15: 16-bit signed Q1.15 sine
   #      cos_float: cosine converted back to float
   #      sin_float: sine converted back to float
-    
+
 
     # Initial CORDIC vector.
     # x starts at K to compensate for CORDIC gain.
@@ -90,7 +83,7 @@ def cordic_rotation(theta_rad):
     y = 0
     z = float_to_fixed(theta_rad, FRAC_BITS)
 
-    # Performing CORDIC micro-rotations.
+    # CORDIC micro-rotations.
     for i in range(ITERATIONS):
         x_shift = y >> i
         y_shift = x >> i
@@ -120,17 +113,16 @@ def cordic_rotation(theta_rad):
 
 
 def generate_test_vectors():
-   
-    # Generate test vectors for the RTL testbench.
+
+    # Write vectors for the RTL testbench.
 
     # Format per line:
     #     angle_fixed cos_expected_q15 sin_expected_q15
- 
+
 
     os.makedirs("tb", exist_ok=True)
 
-    # CORDIC rotation mode works naturally over about +/- 99 degrees.
-    # For this project, we test from -pi/2 to +pi/2.
+    # Test angles used for this project.
     test_angles = [
         -math.pi / 2,
         -math.pi / 3,
