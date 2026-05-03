@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-This project implements a fixed-point CORDIC accelerator for sine and cosine computation. CORDIC is useful in digital signal processing hardware because it can compute trigonometric functions using shifts, additions, subtractions, registers, and a small angle lookup table instead of hardware multipliers.
+For my open-ended VLSI design project, I implemented a fixed-point CORDIC accelerator for sine and cosine computation. CORDIC is useful in digital signal processing hardware because it can compute trigonometric functions using shifts, additions, subtractions, registers, and a small angle lookup table instead of hardware multipliers.
 
 The goal of this project was to develop a high-throughput VLSI-style RTL architecture, verify the fixed-point behavior with a software model, and synthesize the RTL using Synopsys Design Compiler. The final implementation is a 16-stage fully pipelined CORDIC rotation-mode accelerator that accepts an input angle and outputs fixed-point cosine and sine values.
 
@@ -218,7 +218,8 @@ Because of this target-library limitation, the reported power should be interpre
 
 ---
 
-## 11. Development Notes
+
+## 12. Development Notes
 
 The project was built in stages. I first created the Python golden model to make sure the fixed-point CORDIC algorithm worked numerically. After that, I generated fixed-point test vectors and wrote the SystemVerilog RTL for the fully pipelined architecture. I then added a SystemVerilog testbench that reads the Python-generated test vectors.
 
