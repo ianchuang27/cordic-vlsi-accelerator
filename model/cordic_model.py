@@ -1,14 +1,15 @@
 import math
 import os
 
-# ============================================================
+
 # Fixed-Point CORDIC Golden Model
 # Rotation mode: computes cos(theta) and sin(theta)
 # ============================================================
 
-# ----------------------------
+
 # Fixed-point design choices
-# ----------------------------
+
+
 INTERNAL_WIDTH = 20
 OUTPUT_WIDTH = 16
 FRAC_BITS = 16
@@ -18,7 +19,6 @@ ITERATIONS = 16
 SCALE = 1 << FRAC_BITS
 OUTPUT_SCALE = 1 << OUTPUT_FRAC_BITS
 
-# ------------------------------------------------------------
 # CORDIC gain correction
 #
 # CORDIC rotations increase the vector magnitude by:
@@ -26,7 +26,7 @@ OUTPUT_SCALE = 1 << OUTPUT_FRAC_BITS
 #
 # To compensate, initialize x0 = K where:
 # K = product(1 / sqrt(1 + 2^(-2i)))
-# ------------------------------------------------------------
+
 K_FLOAT = 1.0
 for i in range(ITERATIONS):
     K_FLOAT *= 1.0 / math.sqrt(1 + 2 ** (-2 * i))
@@ -38,27 +38,27 @@ ATAN_TABLE = [round(math.atan(2 ** -i) * SCALE) for i in range(ITERATIONS)]
 
 
 def float_to_fixed(value, frac_bits=FRAC_BITS):
-    """
-    Convert floating-point value to signed fixed-point integer.
-    """
+    
+    # Converting floating-point value to signed fixed-point integer.
+ 
     return int(round(value * (1 << frac_bits)))
 
 
 def fixed_to_float(value, frac_bits=FRAC_BITS):
-    """
-    Convert signed fixed-point integer back to floating-point.
-    """
+  
+    # Converting signed fixed-point integer back to floating-point.
+   
     return value / float(1 << frac_bits)
 
 
 def saturate_signed(value, width):
-    """
-    Saturate integer to signed range for a given bit width.
+    
+    # Saturating integer to signed range for a given bit width.
 
-    For 16-bit signed:
-    min = -2^15 = -32768
-    max =  2^15 - 1 = 32767
-    """
+    # For 16-bit signed:
+    # min = -2^15 = -32768
+    # max =  2^15 - 1 = 32767
+    
     min_val = -(1 << (width - 1))
     max_val = (1 << (width - 1)) - 1
 
@@ -71,18 +71,17 @@ def saturate_signed(value, width):
 
 
 def cordic_rotation(theta_rad):
-    """
-    Run 16-iteration fixed-point CORDIC rotation mode.
+  # Running 16-iteration fixed-point CORDIC rotation mode.
 
-    Input:
-        theta_rad: input angle in radians
+  #  Input:
+  #      theta_rad: input angle in radians
 
-    Outputs:
-        cos_q15: 16-bit signed Q1.15 cosine
-        sin_q15: 16-bit signed Q1.15 sine
-        cos_float: cosine converted back to float
-        sin_float: sine converted back to float
-    """
+  #  Outputs:
+  #      cos_q15: 16-bit signed Q1.15 cosine
+  #      sin_q15: 16-bit signed Q1.15 sine
+  #      cos_float: cosine converted back to float
+  #      sin_float: sine converted back to float
+    
 
     # Initial CORDIC vector.
     # x starts at K to compensate for CORDIC gain.
@@ -92,7 +91,7 @@ def cordic_rotation(theta_rad):
     y = 0
     z = float_to_fixed(theta_rad, FRAC_BITS)
 
-    # Perform CORDIC micro-rotations.
+    # Performing CORDIC micro-rotations.
     for i in range(ITERATIONS):
         x_shift = y >> i
         y_shift = x >> i
@@ -122,12 +121,12 @@ def cordic_rotation(theta_rad):
 
 
 def generate_test_vectors():
-    """
-    Generate test vectors for the RTL testbench.
+   
+    # Generate test vectors for the RTL testbench.
 
-    Format per line:
-        angle_fixed cos_expected_q15 sin_expected_q15
-    """
+    # Format per line:
+    #     angle_fixed cos_expected_q15 sin_expected_q15
+ 
 
     os.makedirs("tb", exist_ok=True)
 
