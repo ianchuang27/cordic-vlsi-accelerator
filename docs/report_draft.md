@@ -4,7 +4,7 @@
 
 For my open-ended VLSI design project, I implemented a fixed-point CORDIC accelerator for sine and cosine computation. CORDIC is useful in digital signal processing hardware because it can compute trigonometric functions using shifts, additions, subtractions, registers, and a small angle lookup table instead of hardware multipliers.
 
-The goal of this project was to develop a high-throughput VLSI-style RTL architecture, verify the fixed-point behavior with a software model, and synthesize the RTL using Synopsys Design Compiler. The final implementation is a 16-stage fully pipelined CORDIC rotation-mode accelerator that accepts an input angle and outputs fixed-point cosine and sine values.
+My goal was to build a pipelined RTL datapath, check the fixed-point math with a software model, and then synthesize the design with Synopsys Design Compiler. The final implementation is a 16-stage fully pipelined CORDIC rotation-mode accelerator that accepts an input angle and outputs fixed-point cosine and sine values.
 
 The project was developed using a Python golden model, SystemVerilog RTL, a SystemVerilog testbench, and Synopsys Design Compiler NXT on the RPI ECSE `ts3` server.
 
@@ -36,7 +36,7 @@ x_{i+1} = x_i + (y_i >>> i)
 y_{i+1} = y_i - (x_i >>> i)  
 z_{i+1} = z_i + atan(2^-i)  
 
-The shift operations implement multiplication by powers of two. This is why CORDIC is attractive for hardware: each stage only needs shifters, add/subtract logic, registers, and a stored arctangent constant.
+The shift operations implement multiplication by powers of two. This is the main reason I picked CORDIC: the hardware is mostly shifts, add/subtract logic, registers, and a small atan table.
 
 ---
 
@@ -62,7 +62,7 @@ x0 = 39797
 
 The y datapath starts at 0, and the z datapath starts at the input angle. The arctangent lookup table is also stored in fixed-point format using 16 fractional bits.
 
-The final sine and cosine outputs are saturated into 16-bit Q1.15 format. This prevents values close to +1.0 or -1.0 from wrapping around due to signed fixed-point overflow.
+At the output, I saturate the final sine and cosine values into 16-bit Q1.15 format. This prevents values close to +1.0 or -1.0 from wrapping around due to signed fixed-point overflow.
 
 ---
 
@@ -70,7 +70,7 @@ The final sine and cosine outputs are saturated into 16-bit Q1.15 format. This p
 
 The RTL implements a fully pipelined 16-stage CORDIC architecture. Each stage performs one CORDIC micro-rotation and stores the intermediate x, y, z, and valid signals in pipeline registers.
 
-The main architecture includes:
+The design I implemented includes:
 
 - 16 CORDIC stages
 - 20-bit internal x/y/z datapaths
@@ -92,13 +92,13 @@ Since the pipeline can produce one output pair per cycle after filling, the stea
 
 100 million sine/cosine output pairs per second.
 
-This is the main performance advantage of the pipelined architecture.
+That is the main reason the pipelined version is useful.
 
 ---
 
 ## 5. Verification
 
-A Python golden model was written first to verify the fixed-point CORDIC algorithm before synthesis. The model computes sine and cosine using the same 16-iteration fixed-point CORDIC method as the RTL. It also compares the CORDIC outputs against Python's floating-point math library.
+I wrote the Python model first so I could check the fixed-point CORDIC math before working on synthesis. The model computes sine and cosine using the same 16-iteration fixed-point CORDIC method as the RTL. It also compares the CORDIC outputs against Python's floating-point math library.
 
 The Python model generated test vectors for angles from -π/2 to +π/2 radians. The maximum absolute error over the selected test set was approximately:
 
@@ -220,9 +220,9 @@ Because of this target-library limitation, the reported power should be interpre
 ---
 
 
-## 12. Development Notes
+## 11. Development Notes
 
-The project was built in stages. I first created the Python golden model to make sure the fixed-point CORDIC algorithm worked numerically. After that, I generated fixed-point test vectors and wrote the SystemVerilog RTL for the fully pipelined architecture. I then added a SystemVerilog testbench that reads the Python-generated test vectors.
+I built the project in stages. I first created the Python golden model to make sure the fixed-point CORDIC algorithm worked numerically. After that, I generated fixed-point test vectors and wrote the SystemVerilog RTL for the fully pipelined architecture. I then added a SystemVerilog testbench that reads the Python-generated test vectors.
 
 After writing the RTL, I used Synopsys Design Compiler to check, elaborate, synthesize, and report the hardware results. I started with a 10 ns synthesis run, then swept the clock period to see how far the design could be pushed. The 10 ns run met timing, while 9.5 ns and faster runs failed. This gave a clear final performance point of 100 MHz.
 
