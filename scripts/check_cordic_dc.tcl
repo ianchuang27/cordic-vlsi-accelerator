@@ -1,6 +1,4 @@
-# ============================================================
 # Quick Design Compiler syntax/elaboration check for CORDIC
-# ============================================================
 
 set TOP_MODULE cordic_pipelined
 

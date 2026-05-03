@@ -4,7 +4,6 @@ import os
 
 # Fixed-Point CORDIC Golden Model
 # Rotation mode: computes cos(theta) and sin(theta)
-# ============================================================
 
 
 # Fixed-point design choices
