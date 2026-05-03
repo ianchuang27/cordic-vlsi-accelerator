@@ -1,5 +1,4 @@
-# Synopsys Design Compiler synthesis script
-# Fully Pipelined Fixed-Point CORDIC Accelerator
+# Design Compiler run script for the pipelined CORDIC.
 
 set TOP_MODULE cordic_pipelined
 
@@ -20,8 +19,7 @@ check_design > results/check_design_before_compile.rpt
 
 # Timing constraints
 #
-# Clock period for this synthesis sweep point.
-# The exact period is set in the create_clock command below.
+# Clock period for this run.
 create_clock -name clk -period 9.0 [get_ports clk]
 
 set_clock_latency 0.3 [get_clocks clk]
