@@ -3,7 +3,7 @@
 Report : qor
 Design : cordic_pipelined
 Version: W-2024.09-SP2
-Date   : Thu Apr 30 16:41:39 2026
+Date   : Sat May  2 22:04:25 2026
 ****************************************
 
 
@@ -63,12 +63,12 @@ Date   : Thu Apr 30 16:41:39 2026
 
   Compile CPU Statistics
   -----------------------------------------
-  Resource Sharing:                    2.68
-  Logic Optimization:                 15.27
-  Mapping Optimization:               21.43
+  Resource Sharing:                    2.77
+  Logic Optimization:                 14.76
+  Mapping Optimization:               20.46
   -----------------------------------------
-  Overall Compile Time:               48.39
-  Overall Compile Wall Clock Time:    65.50
+  Overall Compile Time:               46.33
+  Overall Compile Wall Clock Time:    65.58
 
   --------------------------------------------------------------------
 
