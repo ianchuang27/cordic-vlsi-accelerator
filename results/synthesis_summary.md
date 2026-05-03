@@ -15,14 +15,15 @@
 
 ## Frequency Calculation
 
-Frequency in MHz was calculated using:
+Frequency in MHz was calculated as:
 
 frequency = 1000 / clock_period_ns
 
-Examples:
+For example, the 10 ns run corresponds to, and for other values:
+
+1000 / 10 = 100 MHz
 
 1000 / 20 ns = 50 MHz  
-1000 / 10 ns = 100 MHz  
 1000 / 9.5 ns = 105.26 MHz  
 1000 / 5 ns = 200 MHz  
 
@@ -42,31 +43,26 @@ Power = 3.32e+03 × 0.0001 mW
 
 Power = 0.3320 mW
 
-## Final Timing Conclusion
+## Timing Result
 
-The fastest tested clock period that met timing was 10 ns, corresponding to 100 MHz. The 10 ns run met timing with 0.00 ns slack, meaning the design barely satisfies the 100 MHz timing constraint. The 9.5 ns run violated timing with -0.11 ns slack, so the current RTL and synthesis setup did not reliably meet 105.26 MHz.
+The fastest tested clock period that met timing was 10 ns. That run had 0.00 ns slack, so it barely met the 100 MHz target. The next faster point, 9.5 ns, failed with -0.11 ns slack. I used 10 ns as the final implementation point because it was the fastest tested period with no violated constraints.
 
-Therefore, the maximum verified clock frequency from the tested synthesis runs is 100 MHz.
+## Area Result
 
-## Area Discussion
+The 10 ns implementation had a total cell area of 34969.000000. The area was lower at 20 ns because the timing constraint was easier. When I pushed the clock faster than 10 ns, Design Compiler used more area but still could not close timing.
 
-The total cell area increased as the timing constraint became more aggressive. At the relaxed 20 ns clock period, the synthesized design had a total cell area of 17031.000000. At the fastest passing clock period of 10 ns, the area increased to 34969.000000.
+## Power Result
 
-More aggressive failing constraints, such as 9.5 ns, 9 ns, 8 ns, 5 ns, 3 ns, and 2 ns, caused Design Compiler to use even more area while still failing timing. This shows the tradeoff between tighter timing constraints and hardware cost.
+The 10 ns power report gave a reported total power of 0.3320 mW. The power report also warned that the library cells were not characterized for internal power, so I treat this value as a switching-power estimate rather than a final post-layout power number.
 
-The 10 ns result is the most important implementation point because it is the fastest tested clock period that successfully met timing.
+## Final Implementation Point
 
-## Power Discussion
-
-The reported total power increased as the clock period became smaller. This is expected because a faster clock increases switching activity per unit time and because Design Compiler may select larger/faster cells to try to meet tighter timing constraints.
-
-However, the power report included the warning:
-
-"The cells in your design are not characterized for internal power. (PWR-229)"
-
-Because of this library limitation, the reported power values should be interpreted as synthesis-level switching-power estimates. Internal power and leakage power were reported as 0.000 because the library did not characterize those components, not because the real chip would have zero internal or leakage power.
-
-## Architecture Summary
+Final selected clock period: 10 ns  
+Final selected frequency: 100 MHz  
+Total cell area: 34969.000000  
+Reported total power: 0.3320 mW  
+Latency: 16 cycles  
+Steady-state throughput: 100 million sine/cosine output pairs per second
 
 The design is a 16-stage fully pipelined fixed-point CORDIC accelerator. It has a latency of 16 cycles and a throughput of one sine/cosine output pair per clock cycle after the pipeline is filled.
 
