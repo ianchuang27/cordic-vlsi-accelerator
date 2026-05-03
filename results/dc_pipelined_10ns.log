@@ -21,19 +21,19 @@ Please use '-no_save' simv switch to avoid this.
             Inclusivity and Diversity" (Refer to article 000036315 at
                         https://solvnetplus.synopsys.com)
 Initializing...
-Current time:       Thu Apr 30 16:39:31 2026
+Current time:       Sat May  2 22:03:17 2026
 Hostname:           ts3.ecse.rpi.edu
 CPU Model:          Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz
 CPU Details:        Cores = 64 : Sockets = 2 : Cache Size = 22528 KB : Freq = 3.90 GHz
 OS:                 Linux 4.18.0-553.120.1.el8_10.x86_64
-RAM:                187 GB (Free 175 GB)
+RAM:                187 GB (Free 160 GB)
 Swap:                 7 GB (Free   7 GB)
 Work Filesystem:    /home/chome mounted to 192.168.40.100:/data/chome
 Tmp Filesystem:     / mounted to /dev/md127
-Work Disk:          300 GB (Free 270 GB)
+Work Disk:          300 GB (Free 268 GB)
 Tmp Disk:            78 GB (Free  64 GB)
 
-CPU Load: 7%, Ram Free: 175 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+CPU Load: 13%, Ram Free: 160 GB, Swap Free: 7 GB, Work Disk Free: 268 GB, Tmp Disk Free: 64 GB
 # ============================================================
 # Synopsys Design Compiler synthesis script
 # Fully Pipelined Fixed-Point CORDIC Accelerator
@@ -59,18 +59,18 @@ Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/stand
   Loading link library 'lsi_10k'
   Loading link library 'gtech'
 Running PRESTO HDLC
-Warning:  ./rtl/cordic_pipelined.sv:90: signed to unsigned part selection occurs. (VER-318)
-Warning:  ./rtl/cordic_pipelined.sv:54: signed to unsigned part selection occurs. (VER-318)
+Warning:  ./rtl/cordic_pipelined.sv:84: signed to unsigned part selection occurs. (VER-318)
+Warning:  ./rtl/cordic_pipelined.sv:53: signed to unsigned part selection occurs. (VER-318)
 
 Inferred memory devices in process in routine 'cordic_pipelined' in file
 	 ./rtl/cordic_pipelined.sv'.
 ==================================================================================
 |    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
 ==================================================================================
-|     y_pipe_reg      | Flip-flop |  339  |  Y  | N  | None  | Async | N  | 101  |
-|     z_pipe_reg      | Flip-flop |  320  |  Y  | N  | None  | Async | N  | 101  |
-|   valid_pipe_reg    | Flip-flop |  17   |  Y  | N  | None  | Async | N  | 101  |
-|     x_pipe_reg      | Flip-flop |  339  |  Y  | N  | None  | Async | N  | 101  |
+|     y_pipe_reg      | Flip-flop |  339  |  Y  | N  | None  | Async | N  | 100  |
+|     z_pipe_reg      | Flip-flop |  320  |  Y  | N  | None  | Async | N  | 100  |
+|   valid_pipe_reg    | Flip-flop |  17   |  Y  | N  | None  | Async | N  | 100  |
+|     x_pipe_reg      | Flip-flop |  339  |  Y  | N  | None  | Async | N  | 100  |
 ==================================================================================
 Presto compilation completed successfully. (cordic_pipelined)
 Module: cordic_pipelined, Ports: 56, Input: 23, Output: 33, Inout: 0
@@ -96,8 +96,8 @@ check_design > results/check_design_before_compile.rpt
 # ------------------------------------------------------------
 # Timing constraints
 #
-# Start with 10 ns clock period.
-# 10 ns period = 100 MHz.
+# Clock period for this synthesis sweep point.
+# The exact period is set in the create_clock command below.
 # ------------------------------------------------------------
 create_clock -name clk -period 10.0 [get_ports clk]
 1
@@ -120,9 +120,8 @@ set_max_fanout 8 [all_inputs]
 # ------------------------------------------------------------
 compile_ultra
 Information: Performing leakage power optimization. (PWR-850)
-CPU Load: 7%, Ram Free: 175 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
-Analyzing: "/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_10k.db"
-Library analysis succeeded.
+CPU Load: 13%, Ram Free: 159 GB, Swap Free: 7 GB, Work Disk Free: 268 GB, Tmp Disk Free: 64 GB
+Alib files are up-to-date.
 Information: Evaluating DesignWare library utilization. (UISN-27)
 
 ============================================================================
@@ -165,7 +164,7 @@ Module: DW01_NAND2, Ports: 3, Input: 2, Output: 1, Inout: 0
 Module: DW01_NAND2, Registers: 0, Async set/reset: 0, Sync set/reset: 0
   Building model 'DW01_NAND2'
 Information: Ungrouping 0 of 1 hierarchies before Pass 1 (OPT-775)
-CPU Load: 3%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+CPU Load: 13%, Ram Free: 159 GB, Swap Free: 7 GB, Work Disk Free: 268 GB, Tmp Disk Free: 64 GB
 Information: State dependent leakage is now switched from on to off.
 
   Beginning Pass 1 Mapping
@@ -222,7 +221,7 @@ Information: The register 'x_pipe_reg[1][7]' is a constant and will be removed. 
 Information: The register 'x_pipe_reg[1][3]' is a constant and will be removed. (OPT-1206)
 Information: The register 'x_pipe_reg[1][1]' is a constant and will be removed. (OPT-1206)
 Information: Added key list 'DesignWare' to design 'cordic_pipelined'. (DDB-72)
-CPU Load: 3%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+CPU Load: 11%, Ram Free: 159 GB, Swap Free: 7 GB, Work Disk Free: 268 GB, Tmp Disk Free: 64 GB
 
   Updating timing information
 Information: Updating design information... (UID-85)
@@ -264,14 +263,14 @@ Information: In design 'cordic_pipelined', the register 'y_pipe_reg[1][15]' is r
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:37   54483.0      0.96     197.8       0.0                              0.0000
-    0:00:38   54070.0      1.59     192.9       0.0                              0.0000
+    0:00:38   54483.0      0.96     197.8       0.0                              0.0000
+    0:00:39   54070.0      1.59     192.9       0.0                              0.0000
 
   Beginning Constant Register Removal
   -----------------------------------
 Information: In design 'cordic_pipelined', the register 'x_pipe_reg[2][18]' is removed because it is merged to 'x_pipe_reg[2][17]'. (OPT-1215)
 Information: In design 'cordic_pipelined', the register 'x_pipe_reg[2][19]' is removed because it is merged to 'x_pipe_reg[2][17]'. (OPT-1215)
-    0:00:38   54005.0      1.59     192.7       0.0                              0.0000
+    0:00:39   54005.0      1.59     192.7       0.0                              0.0000
     0:00:39   53968.0      1.70     199.3       0.0                              0.0000
 
   Beginning Global Optimizations
@@ -326,35 +325,35 @@ Loading db file '/cad/synopsys/design_compiler/W-2024.09-SP2/libraries/syn/lsi_1
   --------------------------------------
 Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][19]' is removed because it is merged to 'y_pipe_reg[2][17]'. (OPT-1215)
 Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][18]' is removed because it is merged to 'y_pipe_reg[2][17]'. (OPT-1215)
-    0:00:48   37768.0      1.03      29.2       0.0                              0.0000
+    0:00:47   37768.0      1.03      29.2       0.0                              0.0000
     0:00:48   37785.0      0.35      18.4       0.0                              0.0000
     0:00:48   37785.0      0.35      18.4       0.0                              0.0000
     0:00:48   37785.0      0.35      18.4       0.0                              0.0000
     0:00:48   37785.0      0.35      18.4       0.0                              0.0000
-    0:00:49   35713.0      0.34      39.3       0.0                              0.0000
-    0:00:49   35713.0      0.34      39.3       0.0                              0.0000
+    0:00:48   35713.0      0.34      39.3       0.0                              0.0000
+    0:00:48   35713.0      0.34      39.3       0.0                              0.0000
     0:00:54   36516.0      0.03       0.1       0.0                              0.0000
     0:00:54   36516.0      0.03       0.1       0.0                              0.0000
     0:00:54   36525.0      0.00       0.0       0.0                              0.0000
     0:00:54   36525.0      0.00       0.0       0.0                              0.0000
+    0:00:55   36533.0      0.00       0.0       0.0                              0.0000
+    0:00:55   36533.0      0.00       0.0       0.0                              0.0000
     0:00:56   36533.0      0.00       0.0       0.0                              0.0000
     0:00:56   36533.0      0.00       0.0       0.0                              0.0000
-    0:00:56   36533.0      0.00       0.0       0.0                              0.0000
-    0:00:56   36533.0      0.00       0.0       0.0                              0.0000
+    0:00:57   36533.0      0.00       0.0       0.0                              0.0000
+    0:00:57   36533.0      0.00       0.0       0.0                              0.0000
     0:00:58   36533.0      0.00       0.0       0.0                              0.0000
     0:00:58   36533.0      0.00       0.0       0.0                              0.0000
-    0:00:58   36533.0      0.00       0.0       0.0                              0.0000
-    0:00:58   36533.0      0.00       0.0       0.0                              0.0000
+    0:00:59   36533.0      0.00       0.0       0.0                              0.0000
+    0:00:59   36533.0      0.00       0.0       0.0                              0.0000
     0:01:00   36533.0      0.00       0.0       0.0                              0.0000
     0:01:00   36533.0      0.00       0.0       0.0                              0.0000
-    0:01:00   36533.0      0.00       0.0       0.0                              0.0000
-    0:01:00   36533.0      0.00       0.0       0.0                              0.0000
-    0:01:02   36533.0      0.00       0.0       0.0                              0.0000
-    0:01:02   36533.0      0.00       0.0       0.0                              0.0000
-    0:01:02   36533.0      0.00       0.0       0.0                              0.0000
-    0:01:02   36533.0      0.00       0.0       0.0                              0.0000
-    0:01:02   36533.0      0.00       0.0       0.0                              0.0000
-    0:01:02   36533.0      0.00       0.0       0.0                              0.0000
+    0:01:01   36533.0      0.00       0.0       0.0                              0.0000
+    0:01:01   36533.0      0.00       0.0       0.0                              0.0000
+    0:01:01   36533.0      0.00       0.0       0.0                              0.0000
+    0:01:01   36533.0      0.00       0.0       0.0                              0.0000
+    0:01:01   36533.0      0.00       0.0       0.0                              0.0000
+    0:01:01   36533.0      0.00       0.0       0.0                              0.0000
     0:01:02   36018.0      0.00       0.0       0.0                              0.0000
     0:01:02   36018.0      0.00       0.0       0.0                              0.0000
     0:01:02   36018.0      0.00       0.0       0.0                              0.0000
@@ -379,19 +378,19 @@ Information: In design 'cordic_pipelined', the register 'y_pipe_reg[2][18]' is r
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:01:03   36018.0      0.00       0.0       0.0                              0.0000
+    0:01:02   36018.0      0.00       0.0       0.0                              0.0000
     0:01:03   35896.0      0.00       0.0       0.0                              0.0000
     0:01:03   35896.0      0.00       0.0       0.0                              0.0000
     0:01:03   35896.0      0.00       0.0       0.0                              0.0000
-    0:01:04   35832.0      0.00       0.0       0.0                              0.0000
+    0:01:03   35832.0      0.00       0.0       0.0                              0.0000
     0:01:04   35053.0      0.00       0.0       0.0                              0.0000
     0:01:04   35053.0      0.00       0.0       0.0                              0.0000
     0:01:04   35053.0      0.00       0.0       0.0                              0.0000
     0:01:04   35053.0      0.00       0.0       0.0                              0.0000
     0:01:04   35053.0      0.00       0.0       0.0                              0.0000
     0:01:04   35053.0      0.00       0.0       0.0                              0.0000
-    0:01:05   34969.0      0.00       0.0       0.0                              0.0000
-CPU Load: 6%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+    0:01:04   34969.0      0.00       0.0       0.0                              0.0000
+CPU Load: 6%, Ram Free: 159 GB, Swap Free: 7 GB, Work Disk Free: 268 GB, Tmp Disk Free: 64 GB
 
 
 Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
@@ -402,7 +401,7 @@ Note: Symbol # after min delay cost means estimated hold TNS across all active s
 Information: State dependent leakage is now switched from off to on.
 Warning: Main library 'lsi_10k' does not specify the following unit required for power: 'Leakage Power'. (PWR-424)
 Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
-CPU Load: 6%, Ram Free: 174 GB, Swap Free: 7 GB, Work Disk Free: 270 GB, Tmp Disk Free: 64 GB
+CPU Load: 6%, Ram Free: 159 GB, Swap Free: 7 GB, Work Disk Free: 268 GB, Tmp Disk Free: 64 GB
 Information: Total number of MV cells in the design.
 ----------------------------------------------------------------------------------------------------
  MV Cells                                           Total Number                                   
@@ -447,7 +446,7 @@ quit
 
 Memory usage for this session 352 Mbytes.
 Memory usage for this session including child processes 352 Mbytes.
-CPU usage for this session 114 seconds ( 0.03 hours ).
-Elapsed time for this session 133 seconds ( 0.04 hours ).
+CPU usage for this session 51 seconds ( 0.01 hours ).
+Elapsed time for this session 72 seconds ( 0.02 hours ).
 
 Thank you...

@@ -7,7 +7,7 @@ Report : timing
         -max_paths 10
 Design : cordic_pipelined
 Version: W-2024.09-SP2
-Date   : Thu Apr 30 16:41:39 2026
+Date   : Sat May  2 22:04:24 2026
 ****************************************
 
 Operating Conditions: nom_pvt   Library: lsi_10k

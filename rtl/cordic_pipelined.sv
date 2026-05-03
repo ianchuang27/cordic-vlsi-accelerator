@@ -1,4 +1,4 @@
-// ============================================================
+
 // Fixed-Point Fully Pipelined CORDIC Accelerator
 // Rotation mode: computes cos(theta) and sin(theta)
 //
@@ -10,7 +10,6 @@
 //
 // Output format:
 //   signed Q1.15, 16-bit
-// ============================================================
 
 module cordic_pipelined #(
     parameter integer IW = 20,
@@ -45,10 +44,10 @@ module cordic_pipelined #(
 
     integer i;
 
-    // ------------------------------------------------------------
+
     // atan lookup table
-    // Values are round(atan(2^-i) * 2^16)
-    // ------------------------------------------------------------
+    // Fixed-point atan(2^-i) table, scaled by 2^16.
+
     function automatic logic signed [IW-1:0] atan_const(input integer idx);
         begin
             case (idx)
@@ -73,31 +72,31 @@ module cordic_pipelined #(
         end
     endfunction
 
-    // ------------------------------------------------------------
-    // Saturate internal Q?.16 value into 16-bit Q1.15 output.
-    // This prevents +1.0 from wrapping around to a negative value.
-    // ------------------------------------------------------------
-    function automatic logic signed [OW-1:0] sat_q15(input logic signed [IW-1:0] val);
-        logic signed [IW-1:0] shifted;
-        begin
-            shifted = val >>> (FRAC_BITS - OUT_FRAC_BITS);
 
-            if (shifted > 20'sd32767)
-                sat_q15 = 16'sd32767;
-            else if (shifted < -20'sd32768)
-                sat_q15 = -16'sd32768;
-            else
-                sat_q15 = shifted[OW-1:0];
-        end
-    endfunction
+    // Converting internal Q?.16 value to saturated Q1.15 output.
+    // prevents +1.0 from wrapping around to a negative value.
 
-    // ------------------------------------------------------------
+function automatic logic signed [OW-1:0] sat_q15(input logic signed [IW-1:0] val);
+    logic signed [IW-1:0] shifted;
+    logic signed [OW-1:0] narrowed;
+    begin
+        shifted = val >>> (FRAC_BITS - OUT_FRAC_BITS);
+        narrowed = shifted[OW-1:0];
+
+        if (shifted > 20'sd32767)
+            sat_q15 = 16'sd32767;
+        else if (shifted < -20'sd32768)
+            sat_q15 = -16'sd32768;
+        else
+            sat_q15 = narrowed;
+    end
+endfunction
+
     // Fully pipelined CORDIC.
     //
-    // Each pipeline stage performs one micro-rotation.
-    // After the pipeline fills, the design outputs one sine/cosine
-    // pair per clock cycle.
-    // ------------------------------------------------------------
+    // One micro-rotation is performed per stage.
+    // Once the pipeline fills, one output pair is produced per cycle.
+
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             for (i = 0; i <= ITERATIONS; i = i + 1) begin
