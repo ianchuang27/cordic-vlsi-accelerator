@@ -1,15 +1,8 @@
 
-// Fixed-Point Fully Pipelined CORDIC Accelerator
-// Rotation mode: computes cos(theta) and sin(theta)
-//
-// Input angle format:
-//   signed fixed-point radians with 16 fractional bits
-//
-// Internal x/y/z format:
-//   signed 20-bit with 16 fractional bits
-//
-// Output format:
-//   signed Q1.15, 16-bit
+// 16-stage fixed-point CORDIC pipeline.
+// Rotation mode: angle_in -> cos_out/sin_out.
+// Internal values use 20-bit signed fixed point with 16 fractional bits.
+// Outputs are saturated to 16-bit Q1.15.
 
 module cordic_pipelined #(
     parameter integer IW = 20,
@@ -32,10 +25,7 @@ module cordic_pipelined #(
     // K = 0.607252935 * 2^16 = 39797
     localparam logic signed [IW-1:0] K_FIXED = 20'sd39797;
 
-    // Pipeline registers.
-    // x_pipe tracks cosine.
-    // y_pipe tracks sine.
-    // z_pipe tracks remaining angle error.
+    // x/y/z state for each pipeline stage.
     logic signed [IW-1:0] x_pipe [0:ITERATIONS];
     logic signed [IW-1:0] y_pipe [0:ITERATIONS];
     logic signed [IW-1:0] z_pipe [0:ITERATIONS];
@@ -45,8 +35,7 @@ module cordic_pipelined #(
     integer i;
 
 
-    // atan lookup table
-    // Fixed-point atan(2^-i) table, scaled by 2^16.
+    // atan(2^-i) table, scaled by 2^16.
 
     function automatic logic signed [IW-1:0] atan_const(input integer idx);
         begin
@@ -73,8 +62,7 @@ module cordic_pipelined #(
     endfunction
 
 
-    // Converting internal Q?.16 value to saturated Q1.15 output.
-    // prevents +1.0 from wrapping around to a negative value.
+    // Convert internal value to saturated Q1.15 output.
 
 function automatic logic signed [OW-1:0] sat_q15(input logic signed [IW-1:0] val);
     logic signed [IW-1:0] shifted;
@@ -92,10 +80,7 @@ function automatic logic signed [OW-1:0] sat_q15(input logic signed [IW-1:0] val
     end
 endfunction
 
-    // Fully pipelined CORDIC.
-    //
-    // One micro-rotation is performed per stage.
-    // Once the pipeline fills, one output pair is produced per cycle.
+    // One CORDIC micro-rotation per pipeline stage.
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
