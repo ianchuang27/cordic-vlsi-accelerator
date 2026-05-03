@@ -56,7 +56,7 @@ K_fixed = round(0.607252935 × 65536)
 
 K_fixed = 39797
 
-The RTL therefore initializes the x datapath using:
+In the RTL, I initialize the x datapath using:
 
 x0 = 39797
 
@@ -104,11 +104,11 @@ The Python model generated test vectors for angles from -π/2 to +π/2 radians. 
 
 6.346e-05
 
-This small error is expected because the design uses finite word-length fixed-point arithmetic and a finite number of CORDIC iterations.
+This error is small enough for this project and mainly comes from fixed-point rounding and using 16 CORDIC iterations.
 
 A SystemVerilog testbench was also written to read the generated test vectors and compare RTL outputs against the Python golden model outputs. The testbench applies one new angle per clock cycle and checks the corresponding sine and cosine outputs when valid_out is asserted.
 
-One limitation was that the available server environment did not include Icarus Verilog, VCS, Questa, or ModelSim in the current PATH. Because of this, RTL simulation was not completed on the server. However, the RTL was successfully analyzed, elaborated, checked, and synthesized using Synopsys Design Compiler. The included testbench and test vectors are ready to use in a SystemVerilog simulator if one is available.
+I checked the server for Icarus Verilog, VCS, Questa, and ModelSim, but none of them were available in my current PATH. Because of that, I left the testbench and vectors in the repo but did not include a simulator log. The RTL was still analyzed, elaborated, checked, and synthesized in Design Compiler.
 
 ---
 
@@ -178,13 +178,13 @@ At 10 ns, the fastest passing clock period, the total cell area increased to:
 
 34969.000000
 
-This increase is expected because Design Compiler may choose faster or larger logic cells to try to meet tighter timing constraints. For clock periods faster than 10 ns, the design still failed timing even though the area continued to increase. This shows that pushing the clock period below 10 ns increased hardware cost without producing a valid timing result.
+The area increase makes sense because Design Compiler has to work harder as the clock period gets tighter. Below 10 ns, the tool used more area but still could not close timing, so those faster runs were not useful implementation points.
 
-The most important area result is therefore the 10 ns result:
+For this project, I used the 10 ns result as the main area result:
 
 Total cell area at 10 ns = 34969.000000
 
-This corresponds to the fastest synthesis point that successfully met timing.
+This is the fastest synthesis point that met timing in my clock sweep.
 
 ---
 
@@ -231,7 +231,7 @@ The main limitation was that I could not run RTL simulation on the server becaus
 
 ## 12. Conclusion
 
-This project successfully implemented a fixed-point pipelined CORDIC accelerator for sine and cosine computation. The design uses shift-add arithmetic instead of hardware multipliers, making it suitable for VLSI DSP applications where trigonometric values are needed repeatedly.
+The final design is a fixed-point pipelined CORDIC accelerator for sine and cosine computation. It uses shift-add arithmetic instead of hardware multipliers, which makes it a good fit for DSP hardware where trigonometric values are needed repeatedly.
 
 A Python golden model was created to verify the fixed-point algorithm and generate test vectors. A SystemVerilog RTL implementation and testbench were written. The RTL was synthesized using Synopsys Design Compiler NXT.
 
