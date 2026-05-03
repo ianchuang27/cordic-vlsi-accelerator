@@ -166,6 +166,7 @@ Therefore, the maximum verified clock frequency from the tested synthesis runs i
 
 The result also shows that the design is close to its timing limit around 100 MHz. A future version could attempt to improve timing by adding more pipeline registers inside each CORDIC stage, reducing datapath width, or restructuring the add/subtract logic.
 
+The design was pushed using a clock-period sweep in Design Compiler. The 10 ns run met timing with 0.00 ns slack, while the next faster tested point, 9.5 ns, failed with -0.11 ns slack. This shows that the current implementation is close to its timing limit around 100 MHz under the selected library and constraints. Because the design is fully pipelined, it can still accept a new input every clock cycle after the pipeline fills, giving a steady-state throughput of 100 million sine/cosine output pairs per second at the 10 ns implementation point.
 ---
 
 ## 9. Area Analysis
