@@ -4,7 +4,7 @@
 
 For this VLSI final project, I implemented a fixed-point CORDIC accelerator for sine and cosine computation. The design uses CORDIC rotation mode, so the hardware computes the result with shifts, additions/subtractions, pipeline registers, and a small arctangent lookup table instead of multipliers.
 
-I chose CORDIC because it is a good DSP/VLSI-style block: the math is useful, the datapath is hardware-friendly, and the design gives a clear architecture tradeoff between latency, throughput, area, and timing.
+I chose CORDIC because it fits the kind of DSP hardware we have been studying: it uses a simple shift-add datapath, and the design makes the tradeoff between latency, throughput, area, and timing easy to measure.
 
 ## Design Summary
 
