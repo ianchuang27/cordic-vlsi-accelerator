@@ -31,9 +31,9 @@ module tb_cordic_pipelined;
     integer cos_tmp;
     integer sin_tmp;
 
-    // ------------------------------------------------------------
+    
     // Device under test
-    // ------------------------------------------------------------
+
     cordic_pipelined dut (
         .clk(clk),
         .rst_n(rst_n),
@@ -44,18 +44,18 @@ module tb_cordic_pipelined;
         .sin_out(sin_out)
     );
 
-    // ------------------------------------------------------------
+
     // Clock generation
     // 10 ns clock period = 100 MHz
-    // ------------------------------------------------------------
+
     initial begin
         clk = 1'b0;
         forever #5 clk = ~clk;
     end
 
-    // ------------------------------------------------------------
-    // Load test vectors from Python golden model
-    // ------------------------------------------------------------
+
+    // Loading test vectors from Python golden model (model/cordic_model.py)
+
     initial begin
         num_tests = 0;
 
@@ -82,11 +82,7 @@ module tb_cordic_pipelined;
         $display("Loaded %0d test vectors.", num_tests);
     end
 
-    // ------------------------------------------------------------
-    // Main stimulus
-    // Drive input values on negative clock edges so they are stable
-    // before the positive clock edge samples them.
-    // ------------------------------------------------------------
+    // Drives inputs on negedge so they are stable before the DUT samples them.
     initial begin
         rst_n = 1'b0;
         valid_in = 1'b0;
@@ -109,11 +105,7 @@ module tb_cordic_pipelined;
         angle_in = '0;
     end
 
-    // ------------------------------------------------------------
-    // Output checker
-    // Check outputs on negative clock edges so output values are
-    // stable after the DUT updates on the positive edge.
-    // ------------------------------------------------------------
+    // Checks outputs after the DUT updates on the positive edge.
     initial begin
         check_idx = 0;
         error_count = 0;
