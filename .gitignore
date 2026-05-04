@@ -1,14 +1,34 @@
-# Synopsys generated/intermediate files
-*.ddc
-*.svf
-*.mr
-*.pvl
-*.syn
-cksum_dir/
-alib-*/
-command.log
-default.svf
+# Quartus generated files/folders
+db/
+incremental_db/
+output_files/
+simulation/
+*.qws
+*.bak
+*.rpt
+*.summary
+*.smsg
+*.done
+*.pin
+*.sof
+*.pof
+*.jdi
+*.qws
+*.qdf
+*.qpf.bak
+*.qsf.bak
 
-# Editor/temp files
-*~
-*.swp
+# ModelSim/Questa generated files
+work/
+transcript
+vsim.wlf
+*.wlf
+*.vcd
+*.vstf
+modelsim.ini
+
+# Keep explicit project source/scripts/results
+!results/
+!results/*.md
+!results/*.rpt
+!results/*.log
