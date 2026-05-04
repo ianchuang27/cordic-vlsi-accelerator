@@ -1,5 +1,7 @@
 # ModelSim RTL simulation script for CORDIC project
 
+file mkdir results
+
 transcript file results/modelsim_rtl_sim.log
 
 if {[file exists work]} {

@@ -1,0 +1,42 @@
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct 5 2016
+# Start time: 21:53:08 on May 03, 2026
+# vlog -reportprogress 300 -sv rtl/cordic_pipelined.sv
+# -- Compiling module cordic_pipelined
+#
+# Top level modules:
+#     cordic_pipelined
+# End time: 21:53:08 on May 03, 2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct 5 2016
+# Start time: 21:53:08 on May 03, 2026
+# vlog -reportprogress 300 -sv tb/tb_cordic_pipelined.sv
+# -- Compiling module tb_cordic_pipelined
+#
+# Top level modules:
+#     tb_cordic_pipelined
+# End time: 21:53:08 on May 03, 2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+
+# vsim work.tb_cordic_pipelined
+# Start time: 21:53:08 on May 03, 2026
+# Loading sv_std.std
+# Loading work.tb_cordic_pipelined
+# Loading work.cordic_pipelined
+# Loaded 11 test vectors.
+# Test 0: cos_out=-1 expected=-1 | sin_out=-32768 expected=-32768
+# Test 1: cos_out=16384 expected=16384 | sin_out=-28380 expected=-28380
+# Test 2: cos_out=23171 expected=23171 | sin_out=-23171 expected=-23171
+# Test 3: cos_out=28380 expected=28380 | sin_out=-16385 expected=-16385
+# Test 4: cos_out=31652 expected=31652 | sin_out=-8479 expected=-8479
+# Test 5: cos_out=32767 expected=32767 | sin_out=1 expected=1
+# Test 6: cos_out=31652 expected=31652 | sin_out=8480 expected=8480
+# Test 7: cos_out=28379 expected=28379 | sin_out=16384 expected=16384
+# Test 8: cos_out=23170 expected=23170 | sin_out=23171 expected=23171
+# Test 9: cos_out=16384 expected=16384 | sin_out=28379 expected=28379
+# Test 10: cos_out=1 expected=1 | sin_out=32767 expected=32767
+# ALL TESTS PASSED.
+# ** Note: $finish    : tb/tb_cordic_pipelined.sv(146)
+#    Time: 400 ns  Iteration: 1  Instance: /tb_cordic_pipelined
+# End time: 21:53:14 on May 03, 2026, Elapsed time: 0:00:06
+# Errors: 0, Warnings: 0

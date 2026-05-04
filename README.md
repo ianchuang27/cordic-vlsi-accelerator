@@ -18,13 +18,28 @@ The final RTL design is a 16-stage fully pipelined CORDIC accelerator.
 
 The tested input angle range is from approximately `-pi/2` to `+pi/2`.
 
+## RTL Simulation and Quartus Compile
+
+The RTL was simulated in ModelSim using `tb/tb_cordic_pipelined.sv`. The testbench reads `tb/test_vectors.txt`, drives each input angle into the RTL, waits for `valid_out`, and compares `cos_out` and `sin_out` against the Python-generated expected values.
+
+The ModelSim run loaded 11 test vectors and completed with all tests passing. The simulation log is included in:
+
+`results/modelsim_rtl_sim.log`
+
+The RTL was also compiled in Quartus Prime Lite Edition for a Cyclone V FPGA target. Quartus full compilation completed with 0 errors. With the 10 ns SDC clock constraint in `cordic_pipelined.sdc`, Quartus reported positive setup slack at all timing corners.
+
+The Quartus compile summary is included in:
+
+`results/quartus_compile_summary.md`
+
 ## Current Status
 
 - Python fixed-point model: complete
 - Test vectors: generated from Python model
 - SystemVerilog RTL: complete
-- SystemVerilog testbench: written
-- RTL simulation: testbench written, but not run on `ts3` because no simulator was available in my PATH
+- SystemVerilog testbench: complete
+- RTL simulation: completed in ModelSim using Python-generated test vectors
+- Quartus FPGA compile: completed successfully with 0 errors using a 10 ns clock constraint
 - Synopsys Design Compiler synthesis: complete
 - Clock-period synthesis sweep: complete
 - Report draft/results: complete draft
@@ -58,7 +73,3 @@ More detailed synthesis results are in:
 - `results/`: Timing, area, power, QoR, and summary reports
 - `figs/`: Architecture diagram
 - `docs/report_draft.md`: Final report draft
-
-## Notes
-
-The main tool limitation I ran into was simulator access. I checked for Icarus Verilog, VCS, Questa, and ModelSim on the server, but none were available in my current PATH. Because of that, the verification flow currently relies on the Python model, generated test vectors, and Design Compiler analysis/elaboration/synthesis. The next improvement would be to run the included testbench in a SystemVerilog simulator and add the simulation log.
