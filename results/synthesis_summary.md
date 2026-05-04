@@ -55,7 +55,7 @@ The 10 ns implementation had a total cell area of 34969.000000. The area was low
 
 The 10 ns power report gave a reported total power of 0.3320 mW. The power report also warned that the library cells were not characterized for internal power, so I treat this value as a switching-power estimate rather than a final post-layout power number.
 
-\## RTL Simulation Result
+## RTL Simulation Result
 
 
 
@@ -63,11 +63,11 @@ RTL simulation was run in ModelSim using:
 
 
 
-\- `rtl/cordic\_pipelined.sv`
+- `rtl/cordic\_pipelined.sv`
 
-\- `tb/tb\_cordic\_pipelined.sv`
+- `tb/tb\_cordic\_pipelined.sv`
 
-\- `tb/test\_vectors.txt`
+- `tb/test\_vectors.txt`
 
 
 
@@ -87,7 +87,7 @@ Simulation log:
 
 
 
-\## Quartus FPGA Compile Result
+## Quartus FPGA Compile Result
 
 
 
